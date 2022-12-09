@@ -11,11 +11,12 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [supplier, setSupplier] = useState(false);
   const [user, loading, error] = useAuthState(auth);
   const history = useNavigate();
   const register = () => {
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    registerWithEmailAndPassword(name, supplier, email, password);
   };
   useEffect(() => {
     if (loading) return;
@@ -30,6 +31,14 @@ function SignUp() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
+        />
+        <h1 className="text-center">Supplier?</h1>
+        <input
+          type="checkbox"
+          className="register__textBox"
+          // value={supplier}
+          onChange={(e) => setSupplier(true)}
+          placeholder="Supplier?"
         />
         <input
           type="text"
@@ -48,6 +57,7 @@ function SignUp() {
         <button className="register__btn" onClick={register}>
           Register
         </button>
+        {supplier && <button>CHECK</button>}
         <button
           className="register__btn register__google"
           onClick={signInWithGoogle}

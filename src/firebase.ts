@@ -56,13 +56,14 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
     alert(err.message);
   }
 };
-const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
+const registerWithEmailAndPassword = async (name: string, supplier: boolean, email: string, password: string) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       name,
+      supplier,
       authProvider: "local",
       email,
     });
