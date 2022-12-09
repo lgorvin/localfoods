@@ -28,10 +28,14 @@ const NavBar = () => {
           </li>
         </ul>
         <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
-          <h1 className=" font-bold inline">SIGN UP</h1>
+          <h1 className=" font-bold inline">
+            <Link to="/signup">SIGN UP</Link>
+          </h1>
         </button>
         <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
-          <h1 className=" font-bold inline">LOG IN</h1>
+          <h1 className=" font-bold inline">
+            <Link to="/login">LOG IN</Link>
+          </h1>
         </button>
       </div>
     </div>
