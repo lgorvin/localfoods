@@ -12,19 +12,50 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [supplier, setSupplier] = useState(false);
+  const handleSClick = () => setSupplier(!supplier);
+  const [consumer, setConsumer] = useState(false);
+  const handleCClick = () => setConsumer(!consumer);
   const [user, loading, error] = useAuthState(auth);
   const history = useNavigate();
   const register = () => {
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, supplier, email, password);
+    registerWithEmailAndPassword(name, supplier, consumer, email, password);
   };
   useEffect(() => {
     if (loading) return;
     if (user) history("/dashboard");
   }, [user, loading]);
   return (
-    <div className="register">
+    <div className="register mt-[-50px] scale-110">
       <div className="register__container">
+        <div className="">
+          <h1 className="mb-[-10px] font-bold">Consumer or Supplier?</h1> <br />
+          <h1 className="text-center inline">Supplier</h1>
+          <input
+            type="checkbox"
+            className="register__textBox inline ml-5 scale-125"
+            // value={supplier}
+            checked={supplier}
+            onClick={handleSClick}
+            placeholder="Supplier?"
+          />
+        </div>
+        <div className="mb-5">
+          <h1 className="text-center inline">Consumer</h1>
+          <input
+            type="checkbox"
+            className="register__textBox inline ml-5 scale-125"
+            // value={supplier}
+            checked={consumer}
+            onClick={handleCClick}
+            placeholder="Supplier?"
+          />
+          {supplier && consumer ? (
+            <h1 className="mt-2 font-black">ONLY PICK ONE</h1>
+          ) : (
+            <h1></h1>
+          )}
+        </div>
         <input
           type="text"
           className="register__textBox"
@@ -32,14 +63,7 @@ function SignUp() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
         />
-        <h1 className="text-center">Supplier?</h1>
-        <input
-          type="checkbox"
-          className="register__textBox"
-          // value={supplier}
-          onChange={(e) => setSupplier(true)}
-          placeholder="Supplier?"
-        />
+
         <input
           type="text"
           className="register__textBox"
@@ -57,7 +81,6 @@ function SignUp() {
         <button className="register__btn" onClick={register}>
           Register
         </button>
-        {supplier && <button>CHECK</button>}
         <button
           className="register__btn register__google"
           onClick={signInWithGoogle}
@@ -65,7 +88,7 @@ function SignUp() {
           Register with Google
         </button>
         <div>
-          Already have an account? <Link to="/">Login</Link> now.
+          Already have an account? <Link to="/login">Login</Link> now.
         </div>
       </div>
     </div>

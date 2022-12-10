@@ -9,13 +9,18 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [supplier, setSupplier] = useState(false);
+  const [consumer, setConsumer] = useState(false);
   const navigate = useNavigate();
   const fetchUserName = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
+      console.log(data);
       setName(data.name);
+      setSupplier(data.supplier);
+      setConsumer(data.consumer);
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -40,12 +45,16 @@ const NavBar = () => {
           <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
             <Link to="/">Home</Link>
           </li>
+
           <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-            Find Food
+            <Link to="/findfood">Find Food</Link>
           </li>
-          <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-            Sell Food
-          </li>
+
+          {supplier && (
+            <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+              <Link to="/supplierhub">Supplier Hub</Link>
+            </li>
+          )}
           <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
             <Link to="/about">About</Link>
           </li>

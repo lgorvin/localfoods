@@ -17,7 +17,7 @@ function LogIn() {
     if (user) navigate("/dashboard");
   }, [user, loading]);
   return (
-    <div className="login">
+    <div className="login mt-[-50px] scale-110">
       <div className="login__container">
         <input
           type="text"
@@ -46,7 +46,7 @@ function LogIn() {
           <Link to="/reset">Forgot Password</Link>
         </div>
         <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
+          Don't have an account? <Link to="/signup">Register</Link> now.
         </div>
       </div>
     </div>
