@@ -11,6 +11,9 @@ body {
 
 #list li{display:inline-block}
 
+
+
+
 .parent {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
