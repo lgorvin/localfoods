@@ -16,6 +16,7 @@ function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const [newName, setNewName] = useState("");
+  const [company, setCompany] = useState("");
   const [docId, setDocId] = useState("");
   const [changeName, setChangeName] = useState(false);
   const handleClick = () => setChangeName(!changeName);
@@ -43,6 +44,7 @@ function Dashboard() {
           cities.push(doc.data().name);
           setDocId(doc.id);
           console.log(docId);
+          setCompany(doc.data().company);
           if (doc.data().supplier == true) {
             setSupplier(true);
           }
@@ -72,11 +74,13 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard__container">
-        Logged in as
-        <div>{name}</div>
-        <div>{user?.email}</div>
+        <h1 className="text-xl font-bold">Dashboard</h1>
+        <h1 className="mt-2">
+          <span className="font-bold">Email:</span> {user?.email}
+        </h1>
         <div>
-          Name: {allUsers} <h1 onClick={handleClick}>Change?</h1>
+          <span className="font-bold">Name:</span> {allUsers}{" "}
+          <h1 onClick={handleClick}>Change?</h1>
           {changeName && (
             <>
               <input
@@ -92,10 +96,17 @@ function Dashboard() {
             </>
           )}
         </div>
+        <h1 className="mt-2">
+          <span className="font-bold">Company:</span> {company}
+        </h1>
         {supplier ? (
-          <h1>You have a supplier account</h1>
+          <h1>
+            <span className="font-bold">Account Type:</span> Supplier
+          </h1>
         ) : (
-          <h1>You have a consumer account</h1>
+          <h1>
+            <span className="font-bold">Account Type:</span> Consumer
+          </h1>
         )}
         <button className="dashboard__btn" onClick={logout}>
           Logout

@@ -47,7 +47,7 @@ const NavBar = () => {
           </li>
 
           <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-            <Link to="/findfood">Find Food</Link>
+            <Link to="/findfood">Food Hub</Link>
           </li>
 
           {supplier && (
@@ -57,6 +57,9 @@ const NavBar = () => {
           )}
           <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
             <Link to="/about">About</Link>
+          </li>
+          <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+            <Link to="/dashboard">Dashboard</Link>
           </li>
         </ul>
         {!user && (

@@ -15,11 +15,19 @@ function SignUp() {
   const handleSClick = () => setSupplier(!supplier);
   const [consumer, setConsumer] = useState(false);
   const handleCClick = () => setConsumer(!consumer);
+  const [company, setCompany] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const history = useNavigate();
   const register = () => {
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, supplier, consumer, email, password);
+    registerWithEmailAndPassword(
+      name,
+      supplier,
+      consumer,
+      email,
+      password,
+      company
+    );
   };
   useEffect(() => {
     if (loading) return;
@@ -39,6 +47,15 @@ function SignUp() {
             onClick={handleSClick}
             placeholder="Supplier?"
           />
+          {supplier && (
+            <input
+              className="mx-2 px-2 py-2 duration-300"
+              type="text"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              placeholder="Company Name"
+            />
+          )}
         </div>
         <div className="mb-5">
           <h1 className="text-center inline">Consumer</h1>
