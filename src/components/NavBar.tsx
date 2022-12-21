@@ -42,7 +42,7 @@ const NavBar = () => {
   }, [user, loading]);
   return (
     <div className="">
-      <div className="w-screen  h-[75px] pb-[150px] mt-[-40px] bg-white  shadow-md">
+      <div className="w-screen  h-[75px] pb-[150px] mt-[-40px] bg-white shadow-md">
         {/* <img className="mt-[85px] mx-[90px] scale-90" src={logo} alt="" /> */}
         <Link to="/">
           <h1 className="lg:ml-16 text-center lg:text-left font-bold text-6xl ">
@@ -119,15 +119,23 @@ const NavBar = () => {
       {!dropDown && (
         <>
           {!tailwindLg && (
-            <div className="bg-white h-[30px] w-screen">
+            <div className="bg-white h-[40px] border-slate-300 border-b-2 shadow-lg w-screen">
               <div className="flex justify-center items-center">
-                <svg
+                {/* <svg
                   onClick={handleDropDown}
                   className="absolute mt-[15px] ml-[-2px] scale-[0.1]"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
                   <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
+                </svg> */}
+                <svg
+                  onClick={handleDropDown}
+                  className="absolute mt-[10px] ml-[-2px] scale-[0.2] min-h-[200px] max-h-[200px] hover:scale-90 duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M3,8H21a1,1,0,0,0,0-2H3A1,1,0,0,0,3,8Zm18,8H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Zm0-5H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z" />
                 </svg>
               </div>
             </div>
@@ -148,8 +156,8 @@ const NavBar = () => {
                       onClick={handleDropDown}
                       className={
                         user
-                          ? "scale-[0.25] mt-[-235px] ml-[-2px] mb-[-60px] rotate-180"
-                          : "scale-[0.15] mt-[-300px] ml-[-2px] mb-[-135px] rotate-180"
+                          ? "scale-[0.25] mt-[-235px] ml-[-2px] mb-[-60px] rotate-180 cursor-pointer"
+                          : "scale-[0.15] mt-[-300px] ml-[-2px] mb-[-135px] rotate-180 cursor-pointer"
                       }
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"

@@ -228,7 +228,7 @@ const SellFood = () => {
           <div className="flex justify-center lg:w-[95vw] w-[80vw] mt-4 ">
             <div>
               <svg
-                className="absolute ml-[10px] mt-[10px] scale-150 hover:rotate-90 active:scale-125 cursor-pointer  duration-300 bi bi-geo-alt"
+                className="absolute ml-[10px] lg:ml-[35px] mt-[10px] scale-150 hover:rotate-90 active:scale-125 cursor-pointer  duration-300 bi bi-geo-alt"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -246,14 +246,14 @@ const SellFood = () => {
               </svg>
               <input
                 onClick={getLocation}
-                className="bg-green-400 rounded-l-lg px-4 py-2 "
+                className="bg-blue-500 rounded-l-lg px-4 py-2 lg:px-10"
                 type="button"
                 value=" "
               ></input>
             </div>
             <button
               type="submit"
-              className="bg-green-400 hover:scale-105 hover:rounded-l-lg duration-300 text-white font-bold px-2 py-2 shadow-lg rounded-r-lg"
+              className="bg-blue-500 hover:scale-105 hover:rounded-l-lg duration-300 text-white font-bold px-2 py-2 lg:px-10 shadow-lg rounded-r-lg"
               onClick={postMaker}
             >
               Create Post
@@ -269,41 +269,44 @@ const SellFood = () => {
               <>
                 <div
                   key={index}
-                  className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 place-items-center md:mx-10 mx-4 duration-500"
+                  className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-8 place-items-center md:mx-10 mx-4 duration-500 bg-slate-600 rounded-lg shadow-lg mb-10"
                 >
-                  <h1 className="mx-2 my-2">
+                  <h1 className="mx-2 my-2 mt-8 text-white">
                     <span className="font-bold">Title:</span> {data.title}
                   </h1>{" "}
-                  <h1 className="my-2">
+                  <h1 className="mx-2 my-2 text-white">
                     <span className="font-bold">Description:</span> {data.desc}
                   </h1>
-                  <h1 className="my-2">
+                  <h1 className="mx-2 my-2 text-white">
                     {" "}
                     <span className="font-bold">Price:</span> £{data.price}
                   </h1>
-                  <div className="group">
-                    <h1 onClick={handleModal} className="font-bold ">
+                  <h1 className="mx-2 my-2 text-white">
+                    <span className="font-bold">Date:</span> {data.date}
+                  </h1>
+                  <h1 className="mx-2 my-2 text-white">
+                    {" "}
+                    <span className="font-bold">User:</span> {data.user}
+                  </h1>
+                  <h1 className="mx-2 my-2 text-white">
+                    {" "}
+                    <span className="font-bold">Company:</span> {data.company}
+                  </h1>
+                  <div className="group my-2">
+                    <h1
+                      onClick={handleModal}
+                      className="font-bold text-center text-white"
+                    >
                       Image:
                     </h1>
                     <img
-                      className="h-[150px] w-[150px]"
+                      className="h-[250px] w-[250px] rounded-md md:h-[150px] lg:w-[150px] "
                       src={data.image}
                       alt="No Image"
                     />
                   </div>
-                  <h1 className="mx-2 my-2">
-                    <span className="font-bold">Date:</span> {data.date}
-                  </h1>
-                  <h1 className="mx-2 my-2">
-                    {" "}
-                    <span className="font-bold">User:</span> {data.user}
-                  </h1>
-                  <h1 className="mx-2 my-2">
-                    {" "}
-                    <span className="font-bold">Company:</span> {data.company}
-                  </h1>
                   <button
-                    className="bg-red-400 text-white font-bold py-2 px-2 rounded-md mb-10 lg:mb-0"
+                    className="bg-red-400 hover:scale-110 duration-300 text-white font-bold py-2 px-2 rounded-md mt-10 mb-10 lg:mb-0"
                     data-value={data.id}
                     onClick={deletePost}
                   >

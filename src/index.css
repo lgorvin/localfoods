@@ -7,6 +7,7 @@
 body {
   font-family: 'Raleway', sans-serif;
   background-color: rgb(250 250 249);
+  overflow-x: hidden;
 }
 
 #list li{display:inline-block}

@@ -114,16 +114,22 @@ function Dashboard() {
               {addAvatar && (
                 <div className="scale-[0.2]">
                   <input
-                    className="px-2 mt-2"
+                    className="px-2 py-4  rounded-lg"
                     type="text"
                     value={avatar}
                     onChange={(e) => setAvatar(e.target.value)}
                     placeholder="Image Link"
                   />
-                  <button onClick={avatarAdd} className="bg-green-500  px-2">
+                  <button
+                    onClick={avatarAdd}
+                    className="bg-green-500 rounded-lg  px-4 py-4"
+                  >
                     Submit
                   </button>
-                  <button onClick={handleAvatar} className="bg-red-500  px-2">
+                  <button
+                    onClick={handleAvatar}
+                    className="bg-red-500 rounded-lg  px-4 py-4"
+                  >
                     Close
                   </button>
                 </div>
