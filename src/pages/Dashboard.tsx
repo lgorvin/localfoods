@@ -17,9 +17,12 @@ function Dashboard() {
   const [name, setName] = useState("");
   const [newName, setNewName] = useState("");
   const [company, setCompany] = useState("");
+  const [newCompany, setNewCompany] = useState("");
   const [docId, setDocId] = useState("");
   const [changeName, setChangeName] = useState(false);
-  const handleClick = () => setChangeName(!changeName);
+  const [changeCompany, setChangeCompany] = useState(false);
+  const handleNameChange = () => setChangeName(!changeName);
+  const handleCompanyChange = () => setChangeCompany(!changeCompany);
   const [allUsers, setAllUsers] = useState("");
   const [supplier, setSupplier] = useState(false);
   const navigate = useNavigate();
@@ -59,6 +62,13 @@ function Dashboard() {
     }
   };
 
+  const companyChanger = async () => {
+    const nameRef = doc(collection(db, "users"), docId);
+    await updateDoc(nameRef, {
+      company: newCompany,
+    });
+  };
+
   const nameChanger = async () => {
     const nameRef = doc(collection(db, "users"), docId);
     await updateDoc(nameRef, {
@@ -78,33 +88,64 @@ function Dashboard() {
         <h1 className="mt-2">
           <span className="font-bold">Email:</span> {user?.email}
         </h1>
-        <div>
-          <span className="font-bold">Name:</span> {allUsers}{" "}
-          <h1 onClick={handleClick}>Change?</h1>
-          {changeName && (
-            <>
-              <input
-                className="px-2"
-                type="text"
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                placeholder="Full Name"
-              />
-              <button onClick={nameChanger} className="bg-green-500  px-2">
-                Submit
-              </button>
-            </>
-          )}
-        </div>
+        <h1 className="mt-2">
+          <span className="font-bold">Name:</span> {allUsers}
+        </h1>{" "}
+        <h1
+          className="hover:text-blue-600 cursor-pointer duration-200"
+          onClick={handleNameChange}
+        >
+          Change?
+        </h1>
+        {changeName && (
+          <>
+            <input
+              className="px-2 mt-2"
+              type="text"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              placeholder="Full Name"
+            />
+            <button onClick={nameChanger} className="bg-green-500  px-2">
+              Submit
+            </button>
+            <button onClick={handleNameChange} className="bg-red-500  px-2">
+              Close
+            </button>
+          </>
+        )}
         <h1 className="mt-2">
           <span className="font-bold">Company:</span> {company}
         </h1>
+        <h1
+          className="hover:text-blue-600 cursor-pointer duration-200"
+          onClick={handleCompanyChange}
+        >
+          Change?
+        </h1>
+        {changeCompany && (
+          <>
+            <input
+              className="px-2 mt-2"
+              type="text"
+              value={newCompany}
+              onChange={(e) => setNewCompany(e.target.value)}
+              placeholder="Company Name"
+            />
+            <button onClick={companyChanger} className="bg-green-500  px-2">
+              Submit
+            </button>
+            <button onClick={handleCompanyChange} className="bg-red-500  px-2">
+              Close
+            </button>
+          </>
+        )}
         {supplier ? (
-          <h1>
+          <h1 className="mt-2">
             <span className="font-bold">Account Type:</span> Supplier
           </h1>
         ) : (
-          <h1>
+          <h1 className="mt-2">
             <span className="font-bold">Account Type:</span> Consumer
           </h1>
         )}
