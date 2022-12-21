@@ -45,7 +45,7 @@ const NavBar = () => {
       <div className="w-screen  h-[75px] pb-[150px] mt-[-40px] bg-white  shadow-md">
         {/* <img className="mt-[85px] mx-[90px] scale-90" src={logo} alt="" /> */}
         <Link to="/">
-          <h1 className="ml-16 font-bold text-6xl ">
+          <h1 className="lg:ml-16 text-center lg:text-left font-bold text-6xl ">
             <span className="text-4xl font-black">
               <br />
               THINK | <span className=" text-green-500">LOCAL</span>
@@ -78,70 +78,91 @@ const NavBar = () => {
         {!dropDown && (
           <>
             {!tailwindLg && (
-              <>
+              <div className="flex justify-center">
                 <svg
                   onClick={handleDropDown}
-                  className="scale-[0.15] mt-[-180px]"
+                  className="scale-[0.15] mr-[4px] mt-[-180px] relative"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
                   <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
                 </svg>
-              </>
+              </div>
             )}
           </>
         )}
-        {dropDown && (
-          <div className="bg-white absolute z-30 h-[270px] w-screen animate__animated animate__zoomIn ">
-            <ul className="text-center mt-[30px] ">
-              <li
-                onClick={handleDropDown}
-                className=" duration-300 cursor-pointer"
-              >
-                <svg
-                  onClick={handleDropDown}
-                  className="scale-[0.15] mt-[-205px] mb-[-160px] rotate-180"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
-                </svg>
-              </li>
-              <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                <Link to="/">Home</Link>
-              </li>
+        {!tailwindLg && (
+          <>
+            {dropDown && (
+              <div className="bg-white absolute z-30 h-[270px] w-screen flex justify-center animate__animated animate__zoomIn ">
+                <ul className="text-center mt-[170px] ">
+                  <li
+                    onClick={handleDropDown}
+                    className=" duration-300 cursor-pointer"
+                  >
+                    <svg
+                      onClick={handleDropDown}
+                      className={
+                        user
+                          ? "scale-[0.25] mt-[-235px] mb-[-60px] rotate-180"
+                          : "scale-[0.15] mt-[-300px] mb-[-135px] rotate-180"
+                      }
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
+                    </svg>
+                  </li>
+                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                    <Link to="/">Home</Link>
+                  </li>
 
-              <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                <Link to="/findfood">Food Hub</Link>
-              </li>
+                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                    <Link to="/findfood">Food Hub</Link>
+                  </li>
 
-              {supplier && (
-                <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                  <Link to="/supplierhub">Supplier Hub</Link>
-                </li>
-              )}
-              <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                <Link to="/about">About</Link>
-              </li>
-              <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              {!user && (
-                <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[25px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
-                  <h1 className=" font-bold inline">
-                    <Link to="/signup">SIGN UP</Link>
-                  </h1>
-                </button>
-              )}
-              {!user && (
-                <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[25px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
-                  <h1 className=" font-bold inline">
-                    <Link to="/login">LOG IN</Link>
-                  </h1>
-                </button>
-              )}
-            </ul>
-          </div>
+                  {supplier && (
+                    <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                      <Link to="/supplierhub">Supplier Hub</Link>
+                    </li>
+                  )}
+                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  {!user && (
+                    <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2  mt-[25px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
+                      <h1 className=" font-bold inline">
+                        <Link to="/signup">SIGN UP</Link>
+                      </h1>
+                    </button>
+                  )}
+                  {!user && (
+                    <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2  mt-[25px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
+                      <h1 className=" font-bold inline">
+                        <Link to="/login">LOG IN</Link>
+                      </h1>
+                    </button>
+                  )}
+                  {user && (
+                    <div className=" mt-[10px]">
+                      <h1 className="text-black text-3xl">
+                        <Link to="/dashboard">{name}</Link>
+                      </h1>
+                      <h1
+                        className="cursor-pointer hover:text-xl duration-300"
+                        onClick={logout}
+                      >
+                        Log Out?
+                      </h1>
+                    </div>
+                  )}
+                </ul>
+              </div>
+            )}
+          </>
         )}
 
         {tailwindLg && (
