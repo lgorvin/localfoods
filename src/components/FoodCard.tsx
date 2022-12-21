@@ -29,6 +29,7 @@ interface Post {
   date: string;
   image: string;
   price: number;
+  company: string;
   id: string;
   lat: number;
   long: number;
@@ -96,6 +97,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
           date: doc.data().date,
           image: doc.data().image,
           price: doc.data().price,
+          company: doc.data().company,
           id: doc.id,
           lat: doc.data().lat,
           long: doc.data().long,
@@ -127,7 +129,9 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
               />
             </div>
             <div className="float-right mt-[-50px] mr-16 font-bold">
-              <h1>{data.user} @ Swindon Butchers</h1>
+              <h1>
+                {data.user} @ {data.company}
+              </h1>
             </div>
 
             <h1 className="font-bold inline ml-4 mt-5 text-xl">{data.title}</h1>

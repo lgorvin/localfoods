@@ -29,6 +29,7 @@ const SellFood = () => {
   const [uid, setUid] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
   const navigate = useNavigate();
 
   const [supplierLat, setSupplierLat] = useState(0);
@@ -42,6 +43,7 @@ const SellFood = () => {
     date: string;
     image: string;
     price: number;
+    company: string;
     id: string;
     lat: number;
     long: number;
@@ -63,6 +65,7 @@ const SellFood = () => {
           setName(doc.data().name);
           setUid(doc.data().uid);
           setDocId(doc.id);
+          setCompany(doc.data().company);
         });
       });
     } catch (err) {
@@ -91,6 +94,7 @@ const SellFood = () => {
       date: new Date().toUTCString(),
       image: image,
       price: parseFloat(price),
+      company: company,
       id: id,
       lat: supplierLat,
       long: supplierLong,
@@ -172,6 +176,7 @@ const SellFood = () => {
           date: doc.data().date,
           image: doc.data().image,
           price: doc.data().price,
+          company: doc.data().company,
           id: doc.id,
           lat: doc.data().lat,
           long: doc.data().long,
@@ -217,7 +222,7 @@ const SellFood = () => {
             placeholder="Price £"
           />
           <>
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -227,6 +232,23 @@ const SellFood = () => {
             >
               <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
               <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg> */}
+            <svg
+              className="absolute right-0 mr-[613px] scale-150 hover:rotate-90 active:scale-125 cursor-pointer mt-[-28px] duration-300 bi bi-geo-alt"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="white"
+            >
+              <path
+                //style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1"
+                d="M7.994-.002c-2.48 0-4.5 2.02-4.5 4.5a.5.5 0 0 0 .024.158c.042 1.579.726 2.96 1.53 4.24.832 1.323 1.795 2.563 2.413 3.829a.5.5 0 0 0 .894.01c.65-1.265 1.662-2.507 2.536-3.829.873-1.322 1.619-2.75 1.619-4.4a.5.5 0 0 0-.033-.186C12.38 1.925 10.413-.002 7.994-.002zm0 1c1.94 0 3.5 1.561 3.5 3.5a.5.5 0 0 0 .01.107c-.03 1.308-.634 2.52-1.447 3.75-.688 1.041-1.466 2.116-2.137 3.233-.637-1.112-1.371-2.185-2.024-3.223C5.103 7.102 4.51 5.86 4.51 4.505a.5.5 0 0 0-.008-.087A3.488 3.488 0 0 1 7.994.998zm0 2.002c-.822 0-1.5.678-1.5 1.5S7.172 6 7.994 6c.823 0 1.5-.678 1.5-1.5S8.817 3 7.994 3zm0 1c.282 0 .5.218.5.5 0 .282-.218.5-.5.5a.493.493 0 0 1-.5-.5c0-.282.218-.5.5-.5zm4.09 5.227a.5.5 0 0 0-.18.966c.997.404 1.638.933 1.914 1.42.277.487.27.908-.091 1.426-.725 1.036-3.036 1.954-5.674 1.965-2.639.01-4.982-.883-5.748-1.922-.383-.52-.402-.943-.145-1.428.258-.484.875-1.018 1.856-1.43a.5.5 0 1 0-.387-.921c-1.12.47-1.937 1.102-2.352 1.883-.415.78-.343 1.722.223 2.49 1.132 1.534 3.711 2.34 6.559 2.328 2.847-.012 5.402-.837 6.488-2.39.543-.777.58-1.723.14-2.495-.438-.772-1.273-1.394-2.408-1.853a.5.5 0 0 0-.195-.04z"
+                color="#fff"
+                enable-background="accumulate"
+                font-family="sans-serif"
+                font-weight="400"
+                overflow="visible"
+              />
             </svg>
             <input
               onClick={getLocation}
@@ -249,7 +271,7 @@ const SellFood = () => {
         <div>
           <div>
             {posts.map((data, index) => (
-              <div key={index} className="grid grid-cols-7 place-items-center">
+              <div key={index} className="grid grid-cols-8 place-items-center">
                 <h1 className="mx-2 my-2">
                   <span className="font-bold">Title:</span> {data.title}
                 </h1>{" "}
@@ -270,6 +292,10 @@ const SellFood = () => {
                 <h1 className="mx-2 my-2">
                   {" "}
                   <span className="font-bold">User:</span> {data.user}
+                </h1>
+                <h1 className="mx-2 my-2">
+                  {" "}
+                  <span className="font-bold">Company:</span> {data.company}
                 </h1>
                 <button
                   className="bg-red-400 text-white font-bold py-2 px-2 rounded-md"
