@@ -54,47 +54,91 @@ const NavBar = () => {
         </Link>
         {tailwindLg && (
           <ul className="text-center mt-[-36px] " id="list">
-            <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+            <li className="xl:mx-6 mx-2 ml-48 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
               <Link to="/">Home</Link>
             </li>
 
-            <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+            <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
               <Link to="/findfood">Food Hub</Link>
             </li>
 
             {supplier && (
-              <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+              <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
                 <Link to="/supplierhub">Supplier Hub</Link>
               </li>
             )}
-            <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+            <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
               <Link to="/about">About</Link>
             </li>
-            <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+            <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
               <Link to="/dashboard">Dashboard</Link>
             </li>
           </ul>
         )}
-        {!dropDown && (
+
+        {tailwindLg && (
           <>
-            {!tailwindLg && (
-              <div className="flex justify-center">
+            {!user && (
+              <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
+                <h1 className=" font-bold inline">
+                  <Link to="/signup">SIGN UP</Link>
+                </h1>
+              </button>
+            )}
+          </>
+        )}
+        {tailwindLg && (
+          <>
+            {!user && (
+              <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
+                <h1 className=" font-bold inline">
+                  <Link to="/login">LOG IN</Link>
+                </h1>
+              </button>
+            )}
+          </>
+        )}
+        {tailwindLg && (
+          <>
+            {user && (
+              <div className="float-right mt-[-45px] mr-[35px]">
+                <h1 className="text-black text-3xl">
+                  <Link to="/dashboard">{name}</Link>
+                </h1>
+                <h1
+                  className="cursor-pointer hover:text-xl duration-300"
+                  onClick={logout}
+                >
+                  Log Out?
+                </h1>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      {!dropDown && (
+        <>
+          {!tailwindLg && (
+            <div className="bg-white h-[30px] w-screen">
+              <div className="flex justify-center items-center">
                 <svg
                   onClick={handleDropDown}
-                  className="scale-[0.15] mr-[4px] mt-[-180px] relative"
+                  className="absolute mt-[15px] ml-[-2px] scale-[0.1]"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
                   <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z" />
                 </svg>
               </div>
-            )}
-          </>
-        )}
+            </div>
+          )}
+        </>
+      )}
+      <div>
         {!tailwindLg && (
           <>
             {dropDown && (
-              <div className="bg-white absolute z-30 h-[270px] w-screen flex justify-center animate__animated animate__zoomIn ">
+              <div className="bg-white absolute z-30 h-[270px] w-screen flex justify-center animate__animated ">
                 <ul className="text-center mt-[170px] ">
                   <li
                     onClick={handleDropDown}
@@ -104,8 +148,8 @@ const NavBar = () => {
                       onClick={handleDropDown}
                       className={
                         user
-                          ? "scale-[0.25] mt-[-235px] mb-[-60px] rotate-180"
-                          : "scale-[0.15] mt-[-300px] mb-[-135px] rotate-180"
+                          ? "scale-[0.25] mt-[-235px] ml-[-2px] mb-[-60px] rotate-180"
+                          : "scale-[0.15] mt-[-300px] ml-[-2px] mb-[-135px] rotate-180"
                       }
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -160,48 +204,6 @@ const NavBar = () => {
                     </div>
                   )}
                 </ul>
-              </div>
-            )}
-          </>
-        )}
-
-        {tailwindLg && (
-          <>
-            {!user && (
-              <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
-                <h1 className=" font-bold inline">
-                  <Link to="/signup">SIGN UP</Link>
-                </h1>
-              </button>
-            )}
-          </>
-        )}
-
-        {tailwindLg && (
-          <>
-            {!user && (
-              <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
-                <h1 className=" font-bold inline">
-                  <Link to="/login">LOG IN</Link>
-                </h1>
-              </button>
-            )}
-          </>
-        )}
-
-        {tailwindLg && (
-          <>
-            {user && (
-              <div className="float-right mt-[-45px] mr-[35px]">
-                <h1 className="text-black text-3xl">
-                  <Link to="/dashboard">{name}</Link>
-                </h1>
-                <h1
-                  className="cursor-pointer hover:text-xl duration-300"
-                  onClick={logout}
-                >
-                  Log Out?
-                </h1>
               </div>
             )}
           </>
