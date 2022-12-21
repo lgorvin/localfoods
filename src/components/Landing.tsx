@@ -16,28 +16,30 @@ const Landing = () => {
   return (
     <>
       <div className="mt-[-10px]">
-        <div className="flex justify-center ">
-          <div className="mt-72 ml-[-700px]">
-            <h1 className="text-6xl font-bold text-right mb-2 animate__animated animate__backInLeft">
+        <div className="flex justify-center w-screen ">
+          <div className="xl:mt-72 lg:mt-72 mt-[100px] lg:ml-[-570px] xl:ml-[-750px] duration-500">
+            <h1 className="xl:text-6xl lg:text-5xl text-2xl font-bold text-center lg:text-right mb-2 animate__animated animate__backInLeft duration-500">
               BUY <span className="text-green-500 font-bold">LOCAL</span>{" "}
             </h1>
-            <h1 className="text-7xl font-bold text-right mb-2 animate__animated animate__backInLeft animate__delay-1s">
+            <h1 className="xl:text-7xl lg:text-6xl text-3xl font-bold text-center lg:text-right mb-2 animate__animated animate__backInLeft animate__delay-1s duration-500">
               GROW <span className="text-green-500 font-bold">LOCAL</span>
             </h1>
-            <h1 className="text-8xl font-bold text-right animate__animated animate__backInLeft animate__delay-2s">
+            <h1 className="xl:text-8xl lg:text-7xl text-4xl font-bold text-center lg:text-right animate__animated animate__backInLeft animate__delay-2s duration-500">
               THINK <span className="text-green-500">LOCAL</span>
             </h1>
           </div>
         </div>
-        <div className="flex justify-center">
-          <div className="bg-black  mt-[-300px] h-[400px] w-[20px] shadow-md rounded-sm"></div>
+        <div className="flex justify-center w-screen">
+          <div className="bg-black mt-[30px] lg:mt-[-250px]  xl:mt-[-330px] h-[10px] w-[300px] lg:h-[300px] lg:w-[20px] xl:h-[400px] xl:w-[20px] shadow-md rounded-sm duration-500"></div>
         </div>
-        <div className="bg-gray-100 ml-[1000px] mt-[-400px] h-[400px] w-[500px] rounded-lg animate__animated animate__backInRight animate__delay-3s">
-          <img
-            className="h-full rounded-sm shadow-md border-4 border-black"
-            src={localImg}
-            alt=""
-          />
+        <div className="flex justify-center ">
+          <div className="bg-gray-100 xl:ml-[600px] lg:ml-[600px]  mt-[30px] lg:mt-[-300px] xl:mt-[-400px] h-[200px] w-[300px] lg:h-[300px] lg:w-[400px] xl:h-[400px] xl:w-[500px] rounded-lg duration-500 animate__animated animate__backInRight animate__delay-3s">
+            <img
+              className="h-full rounded-sm shadow-md border-4 border-black"
+              src={localImg}
+              alt=""
+            />
+          </div>
         </div>
         <Link
           activeClass="active"
@@ -47,7 +49,7 @@ const Landing = () => {
           offset={50}
           duration={500}
         >
-          <h1 className="text-center text-xl cursor-pointer font-bold mt-36">
+          <h1 className="text-center text-xl cursor-pointer font-bold mt-40 lg:mt-36">
             SEE HOW IT WORKS
           </h1>
         </Link>
