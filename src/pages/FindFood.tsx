@@ -19,7 +19,7 @@ const FindFood = () => {
 
   return (
     <>
-      <div>
+      <div className="">
         <h1 className="text-2xl font-bold text-center mt-5">GET LOCATION</h1>
         <div className="grid grid-cols-1 mt-10 place-items-center animate__animated animate__backInLeft animate__slow">
           <FoodCard lat={consumerLat} long={consumerLong} miles={miles} />
