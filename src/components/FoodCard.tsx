@@ -86,7 +86,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
     });
   }, [user, loading, props.lat, props.long]);
   return (
-    <div>
+    <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
       {posts.map((data, index) => (
         <div key={index} className="mb-10">
           <div className="h-[375px] w-[350px] rounded-lg bg-gray-200 shadow-lg hover:scale-110 cursor-pointer duration-300">
