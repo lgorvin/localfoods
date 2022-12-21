@@ -25,11 +25,13 @@ function Dashboard() {
   const [changeName, setChangeName] = useState(false);
   const [changeCompany, setChangeCompany] = useState(false);
   const [addAvatar, setAddAvatar] = useState(false);
+  const [allUsers, setAllUsers] = useState("");
+  const [supplier, setSupplier] = useState(false);
+
   const handleNameChange = () => setChangeName(!changeName);
   const handleCompanyChange = () => setChangeCompany(!changeCompany);
   const handleAvatar = () => setAddAvatar(!addAvatar);
-  const [allUsers, setAllUsers] = useState("");
-  const [supplier, setSupplier] = useState(false);
+
   const navigate = useNavigate();
   const fetchUserName = async () => {
     try {
@@ -42,6 +44,7 @@ function Dashboard() {
       alert("An error occured while fetching user data");
     }
   };
+
   const fetchUserName2 = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -58,7 +61,6 @@ function Dashboard() {
             setSupplier(true);
           }
         });
-
         console.log("Users are: ", cities.join(", "));
         setAllUsers(cities.join(", "));
       });
@@ -98,7 +100,7 @@ function Dashboard() {
   return (
     <div className="dashboard ">
       <div className="dashboard__container">
-        <h1 className="text-xl font-bold">Dashboard</h1>
+        <h1 className="text-2xl font-bold mt-[-20px]">Dashboard</h1>
         <div className="flex justify-center">
           <div className="bg-gray-400 rounded-full h-[150px] w-[150px] shadow-lg">
             <div className="flex justify-center h-full text-8xl">
@@ -133,8 +135,6 @@ function Dashboard() {
                 Add Profile Picture
               </h1>
             )}
-
-            <img src="" alt="" />
           </div>
         </div>
         <h1 className="mt-8">

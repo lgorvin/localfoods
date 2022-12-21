@@ -27,7 +27,6 @@ const SellFood = () => {
   const [id, setId] = useState("");
   const [docId, setDocId] = useState("");
   const [uid, setUid] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -51,8 +50,6 @@ const SellFood = () => {
     long: number;
     children?: JSX.Element | JSX.Element[];
   }
-
-  const postArr: Post[] = [];
 
   const [posts, setPosts] = useState([] as any[]);
 
@@ -78,7 +75,6 @@ const SellFood = () => {
   };
 
   const handleSubmit = (event: any) => {
-    console.log("handleSubmit ran");
     event.preventDefault();
 
     // 👇️ clear all input values in the form
@@ -169,9 +165,6 @@ const SellFood = () => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const postData = Array<Post>();
       querySnapshot.forEach((doc) => {
-        // console.log("Title : ", doc.data().title);
-        console.log("ID : ", doc.id);
-        console.log("Date : ", doc.data().date);
         postData.push({
           title: doc.data().title,
           desc: doc.data().desc,
@@ -187,7 +180,6 @@ const SellFood = () => {
           long: doc.data().long,
         });
       });
-      //console.log(postData);
       setPosts(postData);
     });
   }, [user, loading]);
@@ -227,17 +219,6 @@ const SellFood = () => {
             placeholder="Price £"
           />
           <>
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="white"
-              className="absolute right-0 mr-[253px] scale-150 mt-[-28px] bi bi-geo-alt"
-              viewBox="0 0 16 16"
-            >
-              <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-              <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-            </svg> */}
             <svg
               className="absolute right-0 mr-[613px] scale-150 hover:rotate-90 active:scale-125 cursor-pointer mt-[-28px] duration-300 bi bi-geo-alt"
               xmlns="http://www.w3.org/2000/svg"

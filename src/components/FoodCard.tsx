@@ -2,18 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase";
-import {
-  doc,
-  query,
-  collection,
-  getDocs,
-  where,
-  onSnapshot,
-  updateDoc,
-  addDoc,
-  orderBy,
-  deleteDoc,
-} from "firebase/firestore";
+import { query, collection, where, onSnapshot } from "firebase/firestore";
 
 interface BioProps {
   miles: number;
@@ -40,23 +29,12 @@ interface Post {
 const FoodCard: FunctionComponent<BioProps> = (props) => {
   const [user, loading, error] = useAuthState(auth);
   const [posts, setPosts] = useState([] as any[]);
-  //   let [consumerLat, setConsumerLat] = useState(0);
-  //   let [consumerLong, setConsumerLong] = useState(0);
-  //   let [supplierLat, setSupplierLat] = useState(0);
-  //   let [supplierLong, setSupplierLong] = useState(0);
-
   const [miles, setMiles] = useState(0);
-
-  const handleClick = (test: string) => {
-    console.log(test);
-  };
 
   const distance = async (supplierLat: number, supplierLong: number) => {
     // The math module contains a function
     // named toRadians which converts from
     // degrees to radians.
-    // let supplierLong: number = 0;
-    // let supplierLat: number = 0;
     supplierLong = (supplierLong * Math.PI) / 180;
     let long = (props.long * Math.PI) / 180;
     supplierLat = (supplierLat * Math.PI) / 180;
@@ -88,8 +66,6 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
       const postData = Array<Post>();
       querySnapshot.forEach((doc) => {
         // console.log("Title : ", doc.data().title);
-        console.log("ID : ", doc.id);
-        console.log("img : ", doc.data().avatar);
         postData.push({
           title: doc.data().title,
           desc: doc.data().desc,
@@ -105,11 +81,8 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
           long: doc.data().long,
         });
       });
-
       //distance();
-
       setPosts(postData);
-      console.log(postData);
     });
   }, [user, loading, props.lat, props.long]);
   return (
