@@ -32,6 +32,9 @@ const SellFood = () => {
   const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
 
+  const [modal, setModal] = useState(false);
+  const handleModal = () => setModal(!modal);
+
   const [supplierLat, setSupplierLat] = useState(0);
   const [supplierLong, setSupplierLong] = useState(0);
 
@@ -263,43 +266,51 @@ const SellFood = () => {
         <div>
           <div>
             {posts.map((data, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 place-items-center md:mx-10 mx-4 duration-500"
-              >
-                <h1 className="mx-2 my-2">
-                  <span className="font-bold">Title:</span> {data.title}
-                </h1>{" "}
-                <h1 className="my-2">
-                  <span className="font-bold">Description:</span> {data.desc}
-                </h1>
-                <h1 className="my-2">
-                  {" "}
-                  <span className="font-bold">Price:</span> £{data.price}
-                </h1>
-                <div>
-                  <h1 className="font-bold">Image:</h1>
-                  <img src={data.image} alt="No Image" />
-                </div>
-                <h1 className="my-2">
-                  <span className="font-bold">Date:</span> {data.date}
-                </h1>
-                <h1 className="mx-2 my-2">
-                  {" "}
-                  <span className="font-bold">User:</span> {data.user}
-                </h1>
-                <h1 className="mx-2 my-2">
-                  {" "}
-                  <span className="font-bold">Company:</span> {data.company}
-                </h1>
-                <button
-                  className="bg-red-400 text-white font-bold py-2 px-2 rounded-md mb-10 lg:mb-0"
-                  data-value={data.id}
-                  onClick={deletePost}
+              <>
+                <div
+                  key={index}
+                  className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 place-items-center md:mx-10 mx-4 duration-500"
                 >
-                  DELETE
-                </button>
-              </div>
+                  <h1 className="mx-2 my-2">
+                    <span className="font-bold">Title:</span> {data.title}
+                  </h1>{" "}
+                  <h1 className="my-2">
+                    <span className="font-bold">Description:</span> {data.desc}
+                  </h1>
+                  <h1 className="my-2">
+                    {" "}
+                    <span className="font-bold">Price:</span> £{data.price}
+                  </h1>
+                  <div className="group">
+                    <h1 onClick={handleModal} className="font-bold ">
+                      Image:
+                    </h1>
+                    <img
+                      className="h-[150px] w-[150px]"
+                      src={data.image}
+                      alt="No Image"
+                    />
+                  </div>
+                  <h1 className="mx-2 my-2">
+                    <span className="font-bold">Date:</span> {data.date}
+                  </h1>
+                  <h1 className="mx-2 my-2">
+                    {" "}
+                    <span className="font-bold">User:</span> {data.user}
+                  </h1>
+                  <h1 className="mx-2 my-2">
+                    {" "}
+                    <span className="font-bold">Company:</span> {data.company}
+                  </h1>
+                  <button
+                    className="bg-red-400 text-white font-bold py-2 px-2 rounded-md mb-10 lg:mb-0"
+                    data-value={data.id}
+                    onClick={deletePost}
+                  >
+                    DELETE
+                  </button>
+                </div>
+              </>
             ))}
           </div>
         </div>
