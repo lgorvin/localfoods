@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import { useMediaQuery } from "react-responsive";
+import "animate.css";
 
 const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -91,7 +92,7 @@ const NavBar = () => {
           </>
         )}
         {dropDown && (
-          <div className="bg-white absolute z-30 h-[300px] w-screen">
+          <div className="bg-white absolute z-30 h-[270px] w-screen animate__animated animate__zoomIn ">
             <ul className="text-center mt-[30px] ">
               <li
                 onClick={handleDropDown}
