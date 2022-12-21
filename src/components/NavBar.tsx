@@ -80,7 +80,9 @@ const NavBar = () => {
 
         {user && (
           <div className="float-right mt-[-45px] mr-[35px]">
-            <h1 className="text-black text-3xl">{name}</h1>
+            <h1 className="text-black text-3xl">
+              <Link to="/dashboard">{name}</Link>
+            </h1>
             <h1
               className="cursor-pointer hover:text-xl duration-300"
               onClick={logout}

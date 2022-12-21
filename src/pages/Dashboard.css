@@ -1,9 +1,10 @@
 .dashboard {
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
+    
   }
   .dashboard__container {
     display: flex;

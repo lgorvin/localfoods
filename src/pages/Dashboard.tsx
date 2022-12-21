@@ -82,7 +82,7 @@ function Dashboard() {
     fetchUserName2();
   }, [user, loading]);
   return (
-    <div className="dashboard">
+    <div className="dashboard ">
       <div className="dashboard__container">
         <h1 className="text-xl font-bold">Dashboard</h1>
         <h1 className="mt-2">
