@@ -145,20 +145,28 @@ const SellFood = () => {
     }
   };
 
-  const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-      setSupplierLat(position.coords.latitude);
-      setSupplierLong(position.coords.longitude);
-    });
-  };
+  // const getLocation = () => {
+  //   console.log("CLICKED");
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     console.log("Latitude is :", position.coords.latitude);
+  //     console.log("Longitude is :", position.coords.longitude);
+  //     setSupplierLat(position.coords.latitude);
+  //     setSupplierLong(position.coords.longitude);
+  //   });
+  // };
 
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
 
     fetchUserName2();
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+      setSupplierLat(position.coords.latitude);
+      setSupplierLong(position.coords.longitude);
+    });
 
     const q = query(
       collection(db, "posts"),
@@ -245,7 +253,7 @@ const SellFood = () => {
                 />
               </svg>
               <input
-                onClick={getLocation}
+                // onClick={getLocation}
                 className="bg-blue-500 rounded-l-lg px-4 py-2 lg:px-10"
                 type="button"
                 value=" "
