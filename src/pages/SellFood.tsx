@@ -30,6 +30,7 @@ const SellFood = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
 
   const [supplierLat, setSupplierLat] = useState(0);
@@ -44,6 +45,7 @@ const SellFood = () => {
     image: string;
     price: number;
     company: string;
+    avatar: string;
     id: string;
     lat: number;
     long: number;
@@ -66,6 +68,7 @@ const SellFood = () => {
           setUid(doc.data().uid);
           setDocId(doc.id);
           setCompany(doc.data().company);
+          setAvatar(doc.data().avatar);
         });
       });
     } catch (err) {
@@ -95,6 +98,7 @@ const SellFood = () => {
       image: image,
       price: parseFloat(price),
       company: company,
+      avatar: avatar,
       id: id,
       lat: supplierLat,
       long: supplierLong,
@@ -177,6 +181,7 @@ const SellFood = () => {
           image: doc.data().image,
           price: doc.data().price,
           company: doc.data().company,
+          avatar: doc.data().avatar,
           id: doc.id,
           lat: doc.data().lat,
           long: doc.data().long,

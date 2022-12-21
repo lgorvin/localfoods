@@ -11,6 +11,7 @@ import {
   where,
   onSnapshot,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -18,11 +19,15 @@ function Dashboard() {
   const [newName, setNewName] = useState("");
   const [company, setCompany] = useState("");
   const [newCompany, setNewCompany] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [profilePic, setProfilePic] = useState("");
   const [docId, setDocId] = useState("");
   const [changeName, setChangeName] = useState(false);
   const [changeCompany, setChangeCompany] = useState(false);
+  const [addAvatar, setAddAvatar] = useState(false);
   const handleNameChange = () => setChangeName(!changeName);
   const handleCompanyChange = () => setChangeCompany(!changeCompany);
+  const handleAvatar = () => setAddAvatar(!addAvatar);
   const [allUsers, setAllUsers] = useState("");
   const [supplier, setSupplier] = useState(false);
   const navigate = useNavigate();
@@ -48,6 +53,7 @@ function Dashboard() {
           setDocId(doc.id);
           console.log(docId);
           setCompany(doc.data().company);
+          setProfilePic(doc.data().avatar);
           if (doc.data().supplier == true) {
             setSupplier(true);
           }
@@ -76,6 +82,14 @@ function Dashboard() {
     });
   };
 
+  const avatarAdd = async () => {
+    const nameRef = doc(collection(db, "users"), docId);
+    await updateDoc(nameRef, {
+      avatar: avatar,
+    });
+    setAddAvatar(!addAvatar);
+  };
+
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
@@ -85,7 +99,45 @@ function Dashboard() {
     <div className="dashboard ">
       <div className="dashboard__container">
         <h1 className="text-xl font-bold">Dashboard</h1>
-        <h1 className="mt-2">
+        <div className="flex justify-center">
+          <div className="bg-gray-400 rounded-full h-[150px] w-[150px] shadow-lg">
+            <div className="flex justify-center h-full text-8xl">
+              {!addAvatar && (
+                <img
+                  className="rounded-full h-full w-full mt-[-8px]"
+                  src={profilePic}
+                  alt=""
+                />
+              )}
+              {addAvatar && (
+                <div className="scale-[0.2]">
+                  <input
+                    className="px-2 mt-2"
+                    type="text"
+                    value={avatar}
+                    onChange={(e) => setAvatar(e.target.value)}
+                    placeholder="Image Link"
+                  />
+                  <button onClick={avatarAdd} className="bg-green-500  px-2">
+                    Submit
+                  </button>
+                  <button onClick={handleAvatar} className="bg-red-500  px-2">
+                    Close
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {!addAvatar && (
+              <h1 onClick={handleAvatar} className="font-bold cursor-pointer">
+                Add Profile Picture
+              </h1>
+            )}
+
+            <img src="" alt="" />
+          </div>
+        </div>
+        <h1 className="mt-8">
           <span className="font-bold">Email:</span> {user?.email}
         </h1>
         <h1 className="mt-2">

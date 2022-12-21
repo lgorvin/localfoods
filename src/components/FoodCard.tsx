@@ -30,6 +30,7 @@ interface Post {
   image: string;
   price: number;
   company: string;
+  avatar: string;
   id: string;
   lat: number;
   long: number;
@@ -88,7 +89,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
       querySnapshot.forEach((doc) => {
         // console.log("Title : ", doc.data().title);
         console.log("ID : ", doc.id);
-        console.log("Date : ", doc.data().date);
+        console.log("img : ", doc.data().avatar);
         postData.push({
           title: doc.data().title,
           desc: doc.data().desc,
@@ -98,6 +99,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
           image: doc.data().image,
           price: doc.data().price,
           company: doc.data().company,
+          avatar: doc.data().avatar,
           id: doc.id,
           lat: doc.data().lat,
           long: doc.data().long,
@@ -124,7 +126,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
             <div className="h-[45px] w-[45px] border-2 border-gray-600 ml-4 mb-4 shadow-lg bg-black rounded-full">
               <img
                 className="rounded-full h-full w-full shadow-lg"
-                src="https://media.gettyimages.com/id/dv1087037/photo/portrait-of-a-butcher-standing-in-a-butchers-shop-behind-a-chopping-board.jpg?s=1024x1024&w=gi&k=20&c=CzYBjM6OetE_7XtCdx0wzg57SIofMZIkPnE0n1_NxaA="
+                src={data.avatar}
                 alt=""
               />
             </div>
