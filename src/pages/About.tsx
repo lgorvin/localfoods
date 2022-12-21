@@ -5,16 +5,18 @@ const About = () => {
   return (
     <div>
       <div>
-        <h1 className="text-6xl mt-12 text-center font-bold text-green-500">
+        <h1 className="lg:text-6xl hidden lg:block md:text-5xl sm:text-4xl text-2xl mt-12 text-center font-bold text-green-500 duration-300">
           ABOUT
         </h1>
-        <h1 className="text-6xl  text-center font-bold text-green-500">US</h1>
+        <h1 className="lg:text-6xl hidden lg:block md:text-5xl sm:text-4xl text-2xl  text-center font-bold text-green-500 duration-300">
+          US
+        </h1>
       </div>
       <div className="flex justify-center">
-        <div className="bg-black rotate-90  mt-[-175px] h-[400px] w-[10px] shadow-md rounded-sm"></div>
+        <div className="bg-black rotate-90 mt-[195px]  lg:mt-[-175px] lg:h-[400px] w-[10px] shadow-md rounded-sm"></div>
       </div>
-      <div className="grid place-items-center grid-cols-2 mt-[-150px] mx-[500px]">
-        <div className="h-[500px] w-[400px] group hover:bg-white rounded-lg shadow-md bg-green-500 duration-700 animate__animated animate__backInLeft">
+      <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 mt-[-150px] md:mx-[300px] xl:mx-[300px] duration-300">
+        <div className="lg:h-[500px] lg:w-[400px] h-[300px] w-[350px] group hover:bg-white rounded-lg shadow-md bg-green-500 duration-700 animate__animated animate__backInLeft">
           <div className="flex justify-center items-center h-full">
             <h1 className="text-center text-7xl group-hover:hidden text-white font-bold duration-700">
               OUR <br /> MISSION
@@ -26,7 +28,7 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="h-[500px] w-[400px] group hover:bg-white rounded-lg shadow-md bg-green-500 duration-700 animate__animated animate__backInRight">
+        <div className="lg:h-[500px] lg:w-[400px] h-[300px] w-[350px] mt-6 mb-10 lg:mb-0 lg:mt-0 group hover:bg-white rounded-lg shadow-md bg-green-500 duration-700 animate__animated animate__backInRight">
           <div className="flex justify-center items-center h-full">
             <h1 className="text-center text-7xl group-hover:hidden text-white font-bold duration-700">
               WHY <br /> US?
