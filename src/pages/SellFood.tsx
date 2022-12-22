@@ -46,7 +46,7 @@ const SellFood = () => {
     date: string;
     image: string;
     price: number;
-    company: string;
+    company?: string;
     avatar: string;
     id: string;
     lat: number;
@@ -97,7 +97,7 @@ const SellFood = () => {
       image: image,
       price: parseFloat(price),
       company: company,
-      avatar: avatar,
+      avatar: avatar || null,
       id: id,
       lat: supplierLat,
       long: supplierLong,

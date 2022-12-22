@@ -31,6 +31,8 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
   const [posts, setPosts] = useState([] as any[]);
   const [miles, setMiles] = useState(0);
 
+  const [test, setTest] = useState<any[]>([]);
+
   const distance = async (supplierLat: number, supplierLong: number) => {
     // The math module contains a function
     // named toRadians which converts from
@@ -60,6 +62,8 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
     console.log(`Consumer distance to supplier is ${miles} miles`);
   };
 
+  const arr: number[] = [];
+
   function calcCrow(lat1: number, lon1: number, lat2: number, lon2: number) {
     var R = 3956; // km
     var dLat = toRad(lat2 - lat1);
@@ -74,6 +78,10 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
     var d = R * c;
 
     setMiles(d);
+
+    setTest((current) => [...current, d]);
+
+    console.log(test);
 
     console.log(`lat1: ${lat1}, lon1: ${lon1} lat2: ${lat2}, ${lon2}`);
 
@@ -136,22 +144,22 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
 
             <h1 className="font-bold inline ml-4 mt-5 text-xl">{data.title}</h1>
             <h1 className="inline ml-[102px] mt-4 font-bold">
-              {Math.round(miles * 10) / 10} {} Miles away
+              {Math.round(test[index] * 10) / 10} {} Miles away
             </h1>
             <h2 className="float-right mr-4 text-sm">
               <span className="font-bold text-xl">£{data.price}</span> per kg
             </h2>
-            <p
-              onClick={() =>
-                calcCrow(data.lat, data.long, props.lat, props.long)
-              }
-              className="mx-4"
-            >
-              {data.desc}
-            </p>
+            <p className="mx-4">{data.desc}</p>
+            {/* <p>
+              location: {data.lat}, {data.long}
+              <br />
+              {test[index]}
+            </p> */}
             <button
               className="mx-4 bg-blue-400 mt-2 rounded-md px-2 hover:scale-105 duration-300"
-              onClick={() => distance(data.lat, data.long)}
+              onClick={() => {
+                calcCrow(data.lat, data.long, props.lat, props.long);
+              }}
             >
               Check Distance
             </button>
