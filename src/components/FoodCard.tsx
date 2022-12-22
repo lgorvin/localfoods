@@ -2,7 +2,13 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase";
-import { query, collection, where, onSnapshot } from "firebase/firestore";
+import {
+  query,
+  collection,
+  where,
+  onSnapshot,
+  getDocs,
+} from "firebase/firestore";
 
 interface BioProps {
   miles: number;
@@ -31,37 +37,10 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
   const [posts, setPosts] = useState([] as any[]);
   const [miles, setMiles] = useState(0);
 
+  const [cLat, setCLat] = useState(0);
+  const [cLong, setCLong] = useState(0);
+
   const [test, setTest] = useState<any[]>([]);
-
-  const distance = async (supplierLat: number, supplierLong: number) => {
-    // The math module contains a function
-    // named toRadians which converts from
-    // degrees to radians.
-    supplierLong = (supplierLong * Math.PI) / 180;
-    let long = (props.long * Math.PI) / 180;
-    supplierLat = (supplierLat * Math.PI) / 180;
-    let lat = (props.lat * Math.PI) / 180;
-
-    // Haversine formula
-    let dlon = long - supplierLong;
-    let dlat = lat - supplierLat;
-    let a =
-      Math.pow(Math.sin(dlat / 2), 2) +
-      Math.cos(supplierLat) * Math.cos(lat) * Math.pow(Math.sin(dlon / 2), 2);
-
-    let c = 2 * Math.asin(Math.sqrt(a));
-
-    // Radius of earth in kilometers. Use 3956
-    // for miles
-    let r = 3956;
-
-    // calculate the result
-
-    //setMiles(c * r);
-
-    console.log(`Consumer distance to supplier is ${miles} miles`);
-  };
-
   const arr: number[] = [];
 
   function calcCrow(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -93,7 +72,31 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
     return (Value * Math.PI) / 180;
   }
 
+  const fetchUserName2 = async () => {
+    if (!user || !user?.uid) return;
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const doc = await getDocs(q);
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const cities: any = [];
+        querySnapshot.forEach((doc) => {
+          cities.push(doc.data().name);
+          //setDocId(doc.id);
+          console.log(doc.data().lat);
+          setCLat(doc.data().lat);
+          setCLong(doc.data().long);
+        });
+        console.log("Users are: ", cities.join(", "));
+        console.log(`cLat is equal to ${cLat}`);
+      });
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
+
   useEffect(() => {
+    fetchUserName2();
     const q = query(collection(db, "posts"), where("lat", "<=", props.lat));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const postData = Array<Post>();
@@ -118,6 +121,9 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
       setPosts(postData);
     });
   }, [user, loading, props.lat, props.long]);
+
+  // useEffect(() => {}, [cLat, cLong]);
+
   return (
     <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
       {posts.map((data, index) => (
@@ -148,6 +154,15 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
             <h1 className="ml-4 mt-2 font-bold text-white">
               {Math.round(test[index] * 10) / 10} {} Miles away
             </h1>
+            <div>
+              {test.map((loc, index, row) =>
+                index + 1 === row.length ? (
+                  <h1 key={index}>{loc}</h1>
+                ) : (
+                  <h1></h1>
+                )
+              )}
+            </div>
             <h2 className="float-right mr-4 text-sm text-white">
               <span className="font-bold text-xl">£{data.price}</span> per kg
             </h2>
@@ -160,7 +175,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
             <button
               className="mx-4 my-4 bg-blue-400 mt-2 rounded-md px-2 hover:scale-105 duration-300"
               onClick={() => {
-                calcCrow(data.lat, data.long, props.lat, props.long);
+                calcCrow(data.lat, data.long, cLat, cLong);
               }}
             >
               Check Distance
