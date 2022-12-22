@@ -75,7 +75,9 @@ const Landing = () => {
             to track their orders and find out when their order will be
             delivered or when they can collect. There will be a messaging system
             for consumers to message suppliers, strict rules in place to stop
-            trolls.
+            trolls. Have user location data stored in database when they visit
+            the foodhub page, then pull the users lat and long from the database
+            and compare it with the suppliers lat and long;
           </p>
         </Element>
       </div>
