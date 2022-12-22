@@ -57,13 +57,8 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
     var d = R * c;
 
     setMiles(d);
-
     setTest((current) => [...current, d]);
-
-    console.log(test);
-
     console.log(`lat1: ${lat1}, lon1: ${lon1} lat2: ${lat2}, ${lon2}`);
-
     console.log(`Consumer distance to supplier is ${d} miles`);
   }
 
@@ -78,16 +73,14 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const cities: any = [];
+        const users: any = [];
         querySnapshot.forEach((doc) => {
-          cities.push(doc.data().name);
+          users.push(doc.data().name);
           //setDocId(doc.id);
-          console.log(doc.data().lat);
           setCLat(doc.data().lat);
           setCLong(doc.data().long);
         });
-        console.log("Users are: ", cities.join(", "));
-        console.log(`cLat is equal to ${cLat}`);
+        console.log("Users are: ", users.join(", "));
       });
     } catch (err) {
       console.error(err);
@@ -117,12 +110,9 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
           long: doc.data().long,
         });
       });
-      //distance();
       setPosts(postData);
     });
   }, [user, loading, props.lat, props.long]);
-
-  // useEffect(() => {}, [cLat, cLong]);
 
   return (
     <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
@@ -154,24 +144,12 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
             <h1 className="ml-4 mt-2 font-bold text-white">
               {Math.round(test[index] * 10) / 10} {} Miles away
             </h1>
-            <div>
-              {test.map((loc, index, row) =>
-                index + 1 === row.length ? (
-                  <h1 key={index}>{loc}</h1>
-                ) : (
-                  <h1></h1>
-                )
-              )}
-            </div>
+
             <h2 className="float-right mr-4 text-sm text-white">
               <span className="font-bold text-xl">£{data.price}</span> per kg
             </h2>
             <p className="mx-4 text-gray-200">{data.desc}</p>
-            {/* <p>
-              location: {data.lat}, {data.long}
-              <br />
-              {test[index]}
-            </p> */}
+
             <button
               className="mx-4 my-4 bg-blue-400 mt-2 rounded-md px-2 hover:scale-105 duration-300"
               onClick={() => {
