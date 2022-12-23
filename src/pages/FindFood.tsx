@@ -67,7 +67,7 @@ const FindFood = () => {
   return (
     <>
       <div className="">
-        <div className="mt-10  animate__animated animate__backInLeft animate__slow">
+        <div className="mt-10  ">
           <FoodCard />
         </div>
       </div>
