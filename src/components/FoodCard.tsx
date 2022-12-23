@@ -8,7 +8,10 @@ import {
   where,
   onSnapshot,
   getDocs,
+  orderBy,
+  Query,
 } from "firebase/firestore";
+import { getDistance } from "geolib";
 
 interface BioProps {
   miles: number;
@@ -42,6 +45,13 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
 
   const [test, setTest] = useState<any[]>([]);
   const arr: number[] = [];
+
+  const [q, setQ] = useState();
+
+  const [distanceSort, setDistanceSort] = useState(false);
+  const handleDistanceSort = () => setDistanceSort(!distanceSort);
+  const [priceSort, setPriceSort] = useState(false);
+  const handlePriceSort = () => setPriceSort(!priceSort);
 
   function calcCrow(lat1: number, lon1: number, lat2: number, lon2: number) {
     var R = 3956; // km
@@ -90,7 +100,14 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
 
   useEffect(() => {
     fetchUserName2();
-    const q = query(collection(db, "posts"), where("lat", "<=", props.lat));
+
+    let q = query(collection(db, "posts"), orderBy("lat", "desc"));
+    if (distanceSort) {
+      q = query(collection(db, "posts"), orderBy("lat", "asc"));
+    } else if (priceSort) {
+      q = query(collection(db, "posts"), orderBy("price", "asc"));
+    }
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const postData = Array<Post>();
       querySnapshot.forEach((doc) => {
@@ -112,56 +129,80 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
       });
       setPosts(postData);
     });
-  }, [user, loading, props.lat, props.long]);
+  }, [user, loading, props.lat, props.long, distanceSort, priceSort]);
 
   return (
-    <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
-      {posts.map((data, index) => (
-        <div key={index} className="mb-10">
-          <div className="h-[100%] min-h-[400px] max-w-[400px] rounded-lg bg-slate-700 shadow-lg hover:scale-110 cursor-pointer duration-300">
-            <img
-              className="rounded-t-lg max-h-[200px] min-w-[400px] mb-4"
-              src={data.image}
-              alt=""
-            />
-
-            <div className="ml-4 mb-4 font-bold text-2xl text-white">
-              <h1>
-                {data.user} @ {data.company}
-              </h1>
-            </div>
-            <div className="float-right mt-[-50px] mx-4 h-[60px] w-[60px] bg-black rounded-full font-bold text-2xl text-white">
+    <>
+      <h1 className="text-center">Sort</h1>
+      <button
+        onClick={handleDistanceSort}
+        className="bg-red-200 px-2 py-2 ml-4 rounded-md"
+      >
+        Distance
+      </button>
+      <button
+        onClick={handlePriceSort}
+        className="bg-red-200 px-2 py-2 ml-4 rounded-md"
+      >
+        Price
+      </button>
+      <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
+        {posts.map((data, index) => (
+          <div key={index} className="mb-10">
+            <div className="h-[100%] min-h-[400px] max-w-[400px] rounded-lg bg-slate-700 shadow-lg hover:scale-110 cursor-pointer duration-300">
               <img
-                className="rounded-full h-full w-full shadow-lg"
-                src={data.avatar}
+                className="rounded-t-lg max-h-[200px] min-w-[400px] mb-4"
+                src={data.image}
                 alt=""
               />
+
+              <div className="ml-4 mb-4 font-bold text-2xl text-white">
+                <h1>
+                  {data.user} @ {data.company}
+                </h1>
+              </div>
+              <div className="float-right mt-[-50px] mx-4 h-[60px] w-[60px] bg-black rounded-full font-bold text-2xl text-white">
+                <img
+                  className="rounded-full h-full w-full shadow-lg"
+                  src={data.avatar}
+                  alt=""
+                />
+              </div>
+
+              <h1 className="font-bold inline ml-4 mt-5 text-xl text-white">
+                {data.title}
+              </h1>
+              <h1 className="ml-4 mt-2 font-bold text-white">
+                {Math.round(
+                  (getDistance(
+                    { latitude: data.lat, longitude: data.long },
+                    { latitude: cLat, longitude: cLong },
+                    0.1
+                  ) /
+                    1609.34) *
+                    10
+                ) / 10}{" "}
+                {} Miles away
+              </h1>
+
+              <h2 className="float-right mr-4 text-sm text-white">
+                <span className="font-bold text-xl">£{data.price}</span> per kg
+              </h2>
+              <p className="mx-4 text-gray-200">{data.desc}</p>
+
+              <button
+                className="mx-4 my-4 bg-blue-400 mt-2 rounded-md px-2 hover:scale-105 duration-300"
+                onClick={() => {
+                  calcCrow(data.lat, data.long, cLat, cLong);
+                }}
+              >
+                Check Distance
+              </button>
             </div>
-
-            <h1 className="font-bold inline ml-4 mt-5 text-xl text-white">
-              {data.title}
-            </h1>
-            <h1 className="ml-4 mt-2 font-bold text-white">
-              {Math.round(test[index] * 10) / 10} {} Miles away
-            </h1>
-
-            <h2 className="float-right mr-4 text-sm text-white">
-              <span className="font-bold text-xl">£{data.price}</span> per kg
-            </h2>
-            <p className="mx-4 text-gray-200">{data.desc}</p>
-
-            <button
-              className="mx-4 my-4 bg-blue-400 mt-2 rounded-md px-2 hover:scale-105 duration-300"
-              onClick={() => {
-                calcCrow(data.lat, data.long, cLat, cLong);
-              }}
-            >
-              Check Distance
-            </button>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 
