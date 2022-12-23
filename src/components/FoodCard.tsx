@@ -133,19 +133,21 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
 
   return (
     <>
-      <h1 className="text-center">Sort</h1>
-      <button
-        onClick={handleDistanceSort}
-        className="bg-red-200 px-2 py-2 ml-4 rounded-md"
-      >
-        Distance
-      </button>
-      <button
-        onClick={handlePriceSort}
-        className="bg-red-200 px-2 py-2 ml-4 rounded-md"
-      >
-        Price
-      </button>
+      <h1 className="text-center font-bold mb-2 text-xl">SORT</h1>
+      <div className="flex justify-center">
+        <button
+          onClick={handleDistanceSort}
+          className="bg-blue-500 text-white font-bold w-28 py-2 rounded-md mb-10 shadow-md hover:scale-105 active:bg-black duration-300"
+        >
+          Distance
+        </button>
+        <button
+          onClick={handlePriceSort}
+          className="bg-blue-500 text-white font-bold w-28 py-2 ml-4 rounded-md mb-10 shadow-md hover:scale-105 active:bg-black duration-300"
+        >
+          Price
+        </button>
+      </div>
       <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
         {posts.map((data, index) => (
           <div key={index} className="mb-10">
