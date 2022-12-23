@@ -19,7 +19,6 @@ const FindFood = () => {
   let [consumerLat, setConsumerLat] = useState(0);
   let [consumerLong, setConsumerLong] = useState(0);
 
-  const [miles, setMiles] = useState(0);
   const [docId, setDocId] = useState("");
 
   const fetchUserName2 = async () => {
@@ -68,8 +67,8 @@ const FindFood = () => {
   return (
     <>
       <div className="">
-        <div className=" mt-10  animate__animated animate__backInLeft animate__slow">
-          <FoodCard lat={consumerLat} long={consumerLong} miles={miles} />
+        <div className="mt-10  animate__animated animate__backInLeft animate__slow">
+          <FoodCard />
         </div>
       </div>
     </>

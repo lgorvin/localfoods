@@ -13,12 +13,6 @@ import {
 } from "firebase/firestore";
 import { getDistance } from "geolib";
 
-interface BioProps {
-  miles: number;
-  lat: number;
-  long: number;
-}
-
 interface Post {
   title: string;
   desc: string;
@@ -35,47 +29,17 @@ interface Post {
   children?: JSX.Element | JSX.Element[];
 }
 
-const FoodCard: FunctionComponent<BioProps> = (props) => {
+const FoodCard = () => {
   const [user, loading, error] = useAuthState(auth);
   const [posts, setPosts] = useState([] as any[]);
-  const [miles, setMiles] = useState(0);
 
   const [cLat, setCLat] = useState(0);
   const [cLong, setCLong] = useState(0);
-
-  const [test, setTest] = useState<any[]>([]);
-  const arr: number[] = [];
-
-  const [q, setQ] = useState();
 
   const [distanceSort, setDistanceSort] = useState(false);
   const handleDistanceSort = () => setDistanceSort(!distanceSort);
   const [priceSort, setPriceSort] = useState(false);
   const handlePriceSort = () => setPriceSort(!priceSort);
-
-  function calcCrow(lat1: number, lon1: number, lat2: number, lon2: number) {
-    var R = 3956; // km
-    var dLat = toRad(lat2 - lat1);
-    var dLon = toRad(lon2 - lon1);
-    var lat1 = toRad(lat1);
-    var lat2 = toRad(lat2);
-
-    var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-
-    setMiles(d);
-    setTest((current) => [...current, d]);
-    console.log(`lat1: ${lat1}, lon1: ${lon1} lat2: ${lat2}, ${lon2}`);
-    console.log(`Consumer distance to supplier is ${d} miles`);
-  }
-
-  // Converts numeric degrees to radians
-  function toRad(Value: number) {
-    return (Value * Math.PI) / 180;
-  }
 
   const fetchUserName2 = async () => {
     if (!user || !user?.uid) return;
@@ -100,14 +64,12 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
 
   useEffect(() => {
     fetchUserName2();
-
     let q = query(collection(db, "posts"), orderBy("lat", "desc"));
     if (distanceSort) {
       q = query(collection(db, "posts"), orderBy("lat", "asc"));
     } else if (priceSort) {
       q = query(collection(db, "posts"), orderBy("price", "asc"));
     }
-
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const postData = Array<Post>();
       querySnapshot.forEach((doc) => {
@@ -129,7 +91,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
       });
       setPosts(postData);
     });
-  }, [user, loading, props.lat, props.long, distanceSort, priceSort]);
+  }, [user, loading, cLat, cLong, distanceSort, priceSort]);
 
   return (
     <>
@@ -148,7 +110,7 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
           Price
         </button>
       </div>
-      <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
+      <div className="grid place-items-center gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300">
         {posts.map((data, index) => (
           <div key={index} className="mb-10">
             <div className="h-[100%] min-h-[400px] max-w-[400px] rounded-lg bg-slate-700 shadow-lg hover:scale-110 cursor-pointer duration-300">
@@ -157,7 +119,6 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
                 src={data.image}
                 alt=""
               />
-
               <div className="ml-4 mb-4 font-bold text-2xl text-white">
                 <h1>
                   {data.user} @ {data.company}
@@ -170,7 +131,6 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
                   alt=""
                 />
               </div>
-
               <h1 className="font-bold inline ml-4 mt-5 text-xl text-white">
                 {data.title}
               </h1>
@@ -186,20 +146,10 @@ const FoodCard: FunctionComponent<BioProps> = (props) => {
                 ) / 10}{" "}
                 {} Miles away
               </h1>
-
               <h2 className="float-right mr-4 text-sm text-white">
                 <span className="font-bold text-xl">£{data.price}</span> per kg
               </h2>
               <p className="mx-4 text-gray-200">{data.desc}</p>
-
-              <button
-                className="mx-4 my-4 bg-blue-400 mt-2 rounded-md px-2 hover:scale-105 duration-300"
-                onClick={() => {
-                  calcCrow(data.lat, data.long, cLat, cLong);
-                }}
-              >
-                Check Distance
-              </button>
             </div>
           </div>
         ))}
