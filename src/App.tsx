@@ -11,7 +11,6 @@ import Reset from "./pages/Reset";
 import Dashboard from "./pages/Dashboard";
 import SellFood from "./pages/SellFood";
 import FindFood from "./pages/FindFood";
-import Test from "./pages/Test";
 
 function App() {
   return (
