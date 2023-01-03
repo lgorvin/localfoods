@@ -17,9 +17,8 @@ function SignUp() {
   const handleCClick = () => setConsumer(!consumer);
   const [company, setCompany] = useState("");
   const [user, loading, error] = useAuthState(auth);
-
-  let [lat, setLat] = useState(0);
-  let [long, setLong] = useState(0);
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
 
   const history = useNavigate();
   const register = () => {
@@ -36,6 +35,7 @@ function SignUp() {
     );
   };
   useEffect(() => {
+    //if user now logged in take them to dashboard
     if (loading) return;
     if (user) history("/dashboard");
   }, [user, loading]);

@@ -41,7 +41,8 @@ const FoodCard = () => {
   const [priceSort, setPriceSort] = useState(false);
   const handlePriceSort = () => setPriceSort(!priceSort);
 
-  const fetchUserName2 = async () => {
+  //Fetches users name and location from db
+  const fetchUserData = async () => {
     if (!user || !user?.uid) return;
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -63,11 +64,14 @@ const FoodCard = () => {
   };
 
   useEffect(() => {
-    fetchUserName2();
+    fetchUserData();
+    //Auto sorts posts by which are closest to the user
     let q = query(collection(db, "posts"), orderBy("lat", "desc"));
+    //If distance button is clicked the posts are then sorted by furthest away
     if (distanceSort) {
       q = query(collection(db, "posts"), orderBy("lat", "asc"));
     } else if (priceSort) {
+      //If Price sort is clicked the posts are sorted by lowest price
       q = query(collection(db, "posts"), orderBy("price", "asc"));
     }
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

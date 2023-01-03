@@ -58,7 +58,6 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
   }
 };
 
-
 const registerWithEmailAndPassword = async (name: string, supplier: boolean, consumer: boolean, email: string, password: string, company: string, lat: number, long: number) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);

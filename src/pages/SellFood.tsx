@@ -56,7 +56,8 @@ const SellFood = () => {
 
   const [posts, setPosts] = useState([] as any[]);
 
-  const fetchUserName2 = async () => {
+  //Fetches User data
+  const fetchUserData = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
@@ -89,8 +90,10 @@ const SellFood = () => {
     setPrice("");
   };
 
+  //Adds new document to posts collection
+  //Takes data from user inputs set in form and also data fetched from fetchUserData()
   const postMaker = async () => {
-    fetchAdvice();
+    fetchCity();
     const docRef = await addDoc(collection(db, "posts"), {
       title: title,
       desc: desc,
@@ -109,6 +112,7 @@ const SellFood = () => {
     console.log("Document written with ID: ", docRef.id);
   };
 
+  //Deletes the current post selected
   const deletePost = async (id: any) => {
     try {
       console.log(
@@ -125,7 +129,9 @@ const SellFood = () => {
     }
   };
 
-  const fetchAdvice = async () => {
+  //Not currently in use
+  //Get's the users city from lat and long data provided.
+  const fetchCity = async () => {
     axios
       .get(
         `https://api.bigdatacloud.net/data/reverse-geocode?latitude=${supplierLat}&longitude=${supplierLong}&localityLanguage=en&key=bdc_e206f75416ee4fbbae4027b1b2c05421`
@@ -152,14 +158,17 @@ const SellFood = () => {
     if (loading) return;
     if (!user) return navigate("/");
 
-    fetchUserName2();
+    fetchUserData();
 
+    //Queries data from post collection
+    //Placed in useEffect to update when new posts are added
     const q = query(
       collection(db, "posts"),
       where("uid", "==", user?.uid),
       orderBy("date", "desc")
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      //All post data that is mapped out
       const postData = Array<Post>();
       querySnapshot.forEach((doc) => {
         postData.push({

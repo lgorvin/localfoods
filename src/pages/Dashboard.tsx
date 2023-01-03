@@ -33,26 +33,16 @@ function Dashboard() {
   const handleAvatar = () => setAddAvatar(!addAvatar);
 
   const navigate = useNavigate();
-  const fetchUserName = async () => {
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-      const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      setName(data.name);
-    } catch (err) {
-      console.error(err);
-      alert("An error occured while fetching user data");
-    }
-  };
 
-  const fetchUserName2 = async () => {
+  //Fetches user data
+  const fetchUserData = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const cities: any = [];
+        const users: any = [];
         querySnapshot.forEach((doc) => {
-          cities.push(doc.data().name);
+          users.push(doc.data().name);
           setDocId(doc.id);
           console.log(docId);
           setCompany(doc.data().company);
@@ -61,8 +51,8 @@ function Dashboard() {
             setSupplier(true);
           }
         });
-        console.log("Users are: ", cities.join(", "));
-        setAllUsers(cities.join(", "));
+        console.log("Users are: ", users.join(", "));
+        setAllUsers(users.join(", "));
       });
     } catch (err) {
       console.error(err);
@@ -70,6 +60,7 @@ function Dashboard() {
     }
   };
 
+  //Function to change current users company
   const companyChanger = async () => {
     const nameRef = doc(collection(db, "users"), docId);
     await updateDoc(nameRef, {
@@ -77,6 +68,7 @@ function Dashboard() {
     });
   };
 
+  //Function to change current users name
   const nameChanger = async () => {
     const nameRef = doc(collection(db, "users"), docId);
     await updateDoc(nameRef, {
@@ -84,6 +76,7 @@ function Dashboard() {
     });
   };
 
+  //Function to add an avatar to current users account
   const avatarAdd = async () => {
     const nameRef = doc(collection(db, "users"), docId);
     await updateDoc(nameRef, {
@@ -95,7 +88,7 @@ function Dashboard() {
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
-    fetchUserName2();
+    fetchUserData();
   }, [user, loading]);
   return (
     <div className="dashboard ">

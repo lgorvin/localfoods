@@ -16,24 +16,22 @@ import {
 
 const FindFood = () => {
   const [user, loading, error] = useAuthState(auth);
-  let [consumerLat, setConsumerLat] = useState(0);
-  let [consumerLong, setConsumerLong] = useState(0);
-
   const [docId, setDocId] = useState("");
 
-  const fetchUserName2 = async () => {
+  //Fetches name of current logged in user.
+  const fetchUserName = async () => {
     if (!user || !user?.uid) return;
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const cities: any = [];
+        const users: any = [];
         querySnapshot.forEach((doc) => {
-          cities.push(doc.data().name);
+          users.push(doc.data().name);
           setDocId(doc.id);
           console.log(docId);
         });
-        console.log("Users are: ", cities.join(", "));
+        console.log("Users are: ", users.join(", "));
       });
     } catch (err) {
       console.error(err);
@@ -42,22 +40,13 @@ const FindFood = () => {
   };
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      setConsumerLat(position.coords.latitude);
-      setConsumerLong(position.coords.longitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
-  }, []);
-
-  useEffect(() => {
-    fetchUserName2();
-  }, [user, loading, consumerLat, consumerLong]);
+    fetchUserName();
+  }, [user, loading]);
 
   return (
     <>
       <div className="">
-        <div className="mt-10  ">
+        <div className="mt-10">
           <FoodCard />
         </div>
       </div>

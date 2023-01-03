@@ -21,6 +21,7 @@ const NavBar = () => {
   const tailwindLg = useMediaQuery({ query: "(min-width: 1024px)" });
   const tailwindMd = useMediaQuery({ query: "(min-width: 758px)" });
 
+  //Fetches user's name and wether they are consumer or supplier
   const fetchUserName = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
