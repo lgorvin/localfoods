@@ -19,7 +19,6 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/test" element={<Test />} />
         <Route path="/about" element={<About />} />
         <Route path="/supplierhub" element={<SellFood />} />
         <Route path="/findfood" element={<FindFood />} />
