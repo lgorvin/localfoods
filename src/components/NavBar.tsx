@@ -121,7 +121,7 @@ const NavBar = () => {
       {!dropDown && (
         <>
           {!tailwindLg && (
-            <div className="bg-white h-[40px] border-slate-300 border-b-2 shadow-lg w-screen">
+            <div className="bg-white h-[40px] border-slate-200 border-b-2 shadow-lg w-screen">
               <div className="flex justify-center items-center">
                 {/* <svg
                   onClick={handleDropDown}
@@ -133,7 +133,7 @@ const NavBar = () => {
                 </svg> */}
                 <svg
                   onClick={handleDropDown}
-                  className="absolute mt-[10px] ml-[-2px] scale-[0.2] min-h-[200px] max-h-[200px] hover:scale-90 duration-300"
+                  className="absolute mt-[10px] ml-[-2px] scale-[0.2] min-h-[200px] max-h-[200px] hover:scale-[0.3] duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
