@@ -48,7 +48,7 @@ function SignUp() {
     });
   }, [user, loading]);
   return (
-    <div className="register mt-[-50px] scale-110">
+    <div className="h-screen w-screen grid items-center justify-center mt-[-50px] scale-110">
       <div className="register__container">
         <div className="">
           <h1 className="mb-[-10px] font-bold">Consumer or Supplier?</h1> <br />

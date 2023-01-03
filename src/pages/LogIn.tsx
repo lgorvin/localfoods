@@ -16,7 +16,7 @@ function LogIn() {
     if (user) navigate("/dashboard");
   }, [user, loading]);
   return (
-    <div className="login mt-[-50px] scale-110">
+    <div className="h-screen w-screen grid items-center justify-center mt-[-50px] scale-110">
       <div className="login__container">
         <input
           type="text"

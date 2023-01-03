@@ -1,5 +1,5 @@
 import logo from "../assets/logo.png";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import { useMediaQuery } from "react-responsive";
 import "animate.css";
+import App from "../App";
 
 const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -45,34 +46,34 @@ const NavBar = () => {
     <div className="">
       <div className="w-screen  h-[75px] pb-[150px] mt-[-40px] bg-white shadow-md">
         {/* <img className="mt-[85px] mx-[90px] scale-90" src={logo} alt="" /> */}
-        <Link to="/">
+        <NavLink to="/">
           <h1 className="lg:ml-16 text-center lg:text-left font-bold text-6xl ">
             <span className="text-4xl font-black">
               <br />
               THINK | <span className=" text-green-500">LOCAL</span>
             </span>
           </h1>
-        </Link>
+        </NavLink>
         {tailwindLg && (
           <ul className="text-center mt-[-36px] " id="list">
             <li className="xl:mx-6 mx-2 ml-48 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <Link to="/">Home</Link>
+              <NavLink to="/">Home</NavLink>
             </li>
 
             <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <Link to="/findfood">Food Hub</Link>
+              <NavLink to="/findfood">Food Hub</NavLink>
             </li>
 
             {supplier && (
               <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                <Link to="/supplierhub">Supplier Hub</Link>
+                <NavLink to="/supplierhub">Supplier Hub</NavLink>
               </li>
             )}
             <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <Link to="/about">About</Link>
+              <NavLink to="/about">About</NavLink>
             </li>
             <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <Link to="/dashboard">Dashboard</Link>
+              <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
           </ul>
         )}
@@ -82,7 +83,7 @@ const NavBar = () => {
             {!user && (
               <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
                 <h1 className=" font-bold inline">
-                  <Link to="/signup">SIGN UP</Link>
+                  <NavLink to="/signup">SIGN UP</NavLink>
                 </h1>
               </button>
             )}
@@ -93,7 +94,7 @@ const NavBar = () => {
             {!user && (
               <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2 float-right mt-[-35px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
                 <h1 className=" font-bold inline">
-                  <Link to="/login">LOG IN</Link>
+                  <NavLink to="/login">LOG IN</NavLink>
                 </h1>
               </button>
             )}
@@ -104,7 +105,7 @@ const NavBar = () => {
             {user && (
               <div className="float-right mt-[-45px] mr-[35px]">
                 <h1 className="text-black text-3xl">
-                  <Link to="/dashboard">{name}</Link>
+                  <NavLink to="/dashboard">{name}</NavLink>
                 </h1>
                 <h1
                   className="cursor-pointer hover:text-xl duration-300"
@@ -167,42 +168,45 @@ const NavBar = () => {
                     </svg>
                   </li>
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <Link to="/">Home</Link>
+                    <NavLink to="/">Home</NavLink>
+                  </li>
+                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                    <NavLink to="/test">test</NavLink>
                   </li>
 
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <Link to="/findfood">Food Hub</Link>
+                    <NavLink to="/findfood">Food Hub</NavLink>
                   </li>
 
                   {supplier && (
                     <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                      <Link to="/supplierhub">Supplier Hub</Link>
+                      <NavLink to="/supplierhub">Supplier Hub</NavLink>
                     </li>
                   )}
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <Link to="/about">About</Link>
+                    <NavLink to="/about">About</NavLink>
                   </li>
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <Link to="/dashboard">Dashboard</Link>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                   </li>
                   {!user && (
                     <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2  mt-[25px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
                       <h1 className=" font-bold inline">
-                        <Link to="/signup">SIGN UP</Link>
+                        <NavLink to="/signup">SIGN UP</NavLink>
                       </h1>
                     </button>
                   )}
                   {!user && (
                     <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2  mt-[25px] mx-[15px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
                       <h1 className=" font-bold inline">
-                        <Link to="/login">LOG IN</Link>
+                        <NavLink to="/login">LOG IN</NavLink>
                       </h1>
                     </button>
                   )}
                   {user && (
                     <div className=" mt-[10px]">
                       <h1 className="text-black text-3xl">
-                        <Link to="/dashboard">{name}</Link>
+                        <NavLink to="/dashboard">{name}</NavLink>
                       </h1>
                       <h1
                         className="cursor-pointer hover:text-xl duration-300"
@@ -218,6 +222,7 @@ const NavBar = () => {
           </>
         )}
       </div>
+      <Outlet />
     </div>
   );
 };

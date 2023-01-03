@@ -2,6 +2,7 @@ import { useState } from "react";
 import Landing from "./components/Landing";
 import NavBar from "./components/NavBar";
 import { Routes, Route } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import LogIn from "./pages/LogIn";
@@ -10,15 +11,15 @@ import Reset from "./pages/Reset";
 import Dashboard from "./pages/Dashboard";
 import SellFood from "./pages/SellFood";
 import FindFood from "./pages/FindFood";
+import Test from "./pages/Test";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
+    <BrowserRouter>
       <NavBar />
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/about" element={<About />} />
         <Route path="/supplierhub" element={<SellFood />} />
         <Route path="/findfood" element={<FindFood />} />
@@ -28,7 +29,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
