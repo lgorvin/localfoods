@@ -42,6 +42,12 @@ const NavBar = () => {
     if (!user) return navigate("/");
     fetchUserName();
   }, [user, loading]);
+
+  let activeStyle = {
+    textDecoration: "underline",
+  };
+
+  let activeClassName = "underline";
   return (
     <div className="">
       <div className="w-screen  h-[75px] pb-[150px] mt-[-40px] bg-white shadow-md">
@@ -57,24 +63,61 @@ const NavBar = () => {
         {tailwindLg && (
           <ul className="text-center mt-[-36px] " id="list">
             <li className="xl:mx-6 mx-2 ml-48 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <NavLink to="/">Home</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : undefined
+                }
+                to="/"
+              >
+                Home
+              </NavLink>
             </li>
 
             <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <NavLink to="/findfood">Food Hub</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : undefined
+                }
+                to="/findfood"
+              >
+                Food Hub
+              </NavLink>
             </li>
 
             {supplier && (
               <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                <NavLink to="/supplierhub">Supplier Hub</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-green-500" : undefined
+                  }
+                  to="/supplierhub"
+                >
+                  Supplier Hub
+                </NavLink>
               </li>
             )}
             <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <NavLink to="/about">About</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : undefined
+                }
+                to="/about"
+              >
+                About
+              </NavLink>
             </li>
-            <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
+            {user && (
+              <li className="xl:mx-6 mx-2 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-green-500" : undefined
+                  }
+                  to="/dashboard"
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+            )}
           </ul>
         )}
 
@@ -168,24 +211,61 @@ const NavBar = () => {
                     </svg>
                   </li>
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "text-green-500" : undefined
+                      }
+                      to="/"
+                    >
+                      Home
+                    </NavLink>
                   </li>
 
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <NavLink to="/findfood">Food Hub</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "text-green-500" : undefined
+                      }
+                      to="/findfood"
+                    >
+                      Food Hub
+                    </NavLink>
                   </li>
 
                   {supplier && (
                     <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                      <NavLink to="/supplierhub">Supplier Hub</NavLink>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "text-green-500" : undefined
+                        }
+                        to="/supplierhub"
+                      >
+                        Supplier Hub
+                      </NavLink>
                     </li>
                   )}
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <NavLink to="/about">About</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "text-green-500" : undefined
+                      }
+                      to="/about"
+                    >
+                      About
+                    </NavLink>
                   </li>
-                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <NavLink to="/dashboard">Dashboard</NavLink>
-                  </li>
+                  {user && (
+                    <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "text-green-500" : undefined
+                        }
+                        to="/dashboard"
+                      >
+                        Dashboard
+                      </NavLink>
+                    </li>
+                  )}
                   {!user && (
                     <button className="bg-white rounded-md shadow-md border-2 font-semibold border-black px-6 py-2  mt-[25px] mr-[64px] hover:bg-green-500 active:scale-95 hover:text-white duration-500">
                       <h1 className=" font-bold inline">

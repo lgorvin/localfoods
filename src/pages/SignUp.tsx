@@ -49,9 +49,13 @@ function SignUp() {
   }, [user, loading]);
   return (
     <div className="h-screen w-screen flex items-center justify-center">
-      <div className="flex flex-col text-center bg-slate-200 p-[30px]">
+      <div className="flex flex-col text-center bg-slate-200 p-[30px] rounded-lg shadow-md">
         <div className="">
-          <h1 className="mb-[-10px] font-bold">Consumer or Supplier?</h1> <br />
+          <h1 className="font-bold text-3xl mt-[-5px]">Sign Up</h1>
+          <h1 className="mt-[10px] mb-[-20px] font-bold">
+            Consumer or Supplier?
+          </h1>{" "}
+          <br />
           <h1 className="text-center inline">Supplier</h1>
           <input
             type="checkbox"
@@ -110,13 +114,13 @@ function SignUp() {
           placeholder="Password"
         />
         <button
-          className="p-[10px] mb-[10px] text-xl text-white bg-black"
+          className="p-[10px] mb-[10px] text-xl text-white bg-black rounded-md"
           onClick={register}
         >
           Register
         </button>
         <button
-          className="p-[10px] mb-[10px] text-xl text-white bg-blue-600"
+          className="p-[10px] mb-[10px] text-xl text-white bg-blue-600 rounded-md"
           onClick={signInWithGoogle}
         >
           Register with Google

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "animate.css";
 import FoodCard from "../components/FoodCard";
 import { auth, db, logout } from "../firebase";
@@ -46,8 +47,23 @@ const FindFood = () => {
   return (
     <>
       <div className="">
-        <div className="mt-10">
+        <div>
           <FoodCard />
+          {!user && (
+            <div className="h-screen w-screen flex justify-center items-center mt-[-50px]">
+              <h1 className="text-center text-2xl">
+                Please{" "}
+                <span className="text-blue-500">
+                  <Link to="/login">Log In</Link>
+                </span>{" "}
+                or{" "}
+                <span className="text-blue-500">
+                  <Link to="/signup">Sign Up</Link>
+                </span>{" "}
+                to <br /> view all the wonderful foods local to you!
+              </h1>
+            </div>
+          )}
         </div>
       </div>
     </>

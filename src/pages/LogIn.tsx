@@ -17,7 +17,7 @@ function LogIn() {
   }, [user, loading]);
   return (
     <div className="h-screen w-screen flex items-center justify-center">
-      <div className="flex flex-col text-center bg-slate-200 p-[30px]">
+      <div className="flex flex-col text-center bg-slate-200 p-[30px] rounded-lg shadow-md">
         <input
           type="text"
           className="p-[10px] mb-[10px] text-xl"

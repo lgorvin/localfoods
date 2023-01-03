@@ -99,23 +99,25 @@ const FoodCard = () => {
 
   return (
     <>
-      <div className="animate__animated animate__fadeInDown animate_slower">
-        <h1 className="text-center font-bold mb-2 text-xl">SORT</h1>
-        <div className="flex justify-center">
-          <button
-            onClick={handleDistanceSort}
-            className="bg-blue-500 text-white font-bold w-28 py-2 rounded-md mb-10 shadow-md hover:scale-105 active:bg-black duration-300"
-          >
-            Distance
-          </button>
-          <button
-            onClick={handlePriceSort}
-            className="bg-blue-500 text-white font-bold w-28 py-2 ml-4 rounded-md mb-10 shadow-md hover:scale-105 active:bg-black duration-300"
-          >
-            Price
-          </button>
+      {user && (
+        <div className="animate__animated animate__fadeInDown animate_slower">
+          <h1 className="text-center font-bold mb-2 text-xl">SORT</h1>
+          <div className="flex justify-center">
+            <button
+              onClick={handleDistanceSort}
+              className="bg-blue-500 text-white font-bold w-28 py-2 rounded-md mb-10 shadow-md hover:scale-105 active:bg-black duration-300"
+            >
+              Distance
+            </button>
+            <button
+              onClick={handlePriceSort}
+              className="bg-blue-500 text-white font-bold w-28 py-2 ml-4 rounded-md mb-10 shadow-md hover:scale-105 active:bg-black duration-300"
+            >
+              Price
+            </button>
+          </div>
         </div>
-      </div>
+      )}
       <div className="grid place-items-center gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 duration-300 animate__animated animate__fadeInLeft animate__slower">
         {posts.map((data, index) => (
           <div key={index} className="mb-10">
