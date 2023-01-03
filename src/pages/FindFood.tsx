@@ -61,7 +61,7 @@ const FindFood = () => {
 
   useEffect(() => {
     fetchUserName2();
-    locationAdd();
+    //locationAdd();
   }, [user, loading, consumerLat, consumerLong]);
 
   return (

@@ -17,6 +17,10 @@ function SignUp() {
   const handleCClick = () => setConsumer(!consumer);
   const [company, setCompany] = useState("");
   const [user, loading, error] = useAuthState(auth);
+
+  let [lat, setLat] = useState(0);
+  let [long, setLong] = useState(0);
+
   const history = useNavigate();
   const register = () => {
     if (!name) alert("Please enter name");
@@ -26,12 +30,22 @@ function SignUp() {
       consumer,
       email,
       password,
-      company
+      company,
+      lat,
+      long
     );
   };
   useEffect(() => {
     if (loading) return;
     if (user) history("/dashboard");
+  }, [user, loading]);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
   }, [user, loading]);
   return (
     <div className="register mt-[-50px] scale-110">

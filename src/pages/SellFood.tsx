@@ -69,6 +69,8 @@ const SellFood = () => {
           setDocId(doc.id);
           setCompany(doc.data().company);
           setAvatar(doc.data().avatar);
+          setSupplierLat(doc.data().lat);
+          setSupplierLong(doc.data().long);
         });
       });
     } catch (err) {
@@ -164,8 +166,8 @@ const SellFood = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
-      setSupplierLat(position.coords.latitude);
-      setSupplierLong(position.coords.longitude);
+      // setSupplierLat(position.coords.latitude);
+      // setSupplierLong(position.coords.longitude);
     });
 
     const q = query(

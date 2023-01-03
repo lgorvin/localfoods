@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
@@ -56,7 +57,9 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
     alert(err.message);
   }
 };
-const registerWithEmailAndPassword = async (name: string, supplier: boolean, consumer: boolean, email: string, password: string, company: string) => {
+
+
+const registerWithEmailAndPassword = async (name: string, supplier: boolean, consumer: boolean, email: string, password: string, company: string, lat: number, long: number) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -68,6 +71,9 @@ const registerWithEmailAndPassword = async (name: string, supplier: boolean, con
       authProvider: "local",
       email,
       company,
+      lat,
+      long,
+
     });
   } catch (err: any) {
     console.error(err);
