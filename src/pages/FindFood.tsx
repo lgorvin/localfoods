@@ -41,15 +41,6 @@ const FindFood = () => {
     }
   };
 
-  const locationAdd = async () => {
-    const nameRef = doc(collection(db, "users"), docId);
-    await updateDoc(nameRef, {
-      lat: consumerLat,
-      long: consumerLong,
-    });
-    // setAddAvatar(!addAvatar);
-  };
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
@@ -61,7 +52,6 @@ const FindFood = () => {
 
   useEffect(() => {
     fetchUserName2();
-    //locationAdd();
   }, [user, loading, consumerLat, consumerLong]);
 
   return (

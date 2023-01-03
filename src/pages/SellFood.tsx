@@ -90,6 +90,7 @@ const SellFood = () => {
   };
 
   const postMaker = async () => {
+    fetchAdvice();
     const docRef = await addDoc(collection(db, "posts"), {
       title: title,
       desc: desc,
@@ -125,26 +126,16 @@ const SellFood = () => {
   };
 
   const fetchAdvice = async () => {
-    try {
-      //setLoading(true);
-      axios
-        .get(
-          `https://api.bigdatacloud.net/data/reverse-geocode?latitude=${supplierLat}&longitude=${supplierLong}&localityLanguage=en&key=bdc_e206f75416ee4fbbae4027b1b2c05421`
-        )
-        .then((res) => {
-          //setAll(res.data);
-          console.log(res.data.city);
-          //setLoading(false);
-        })
-        .catch((err) => {
-          //setLoading(false);
-          console.log("not working");
-        });
-    } catch (error) {
-      //setLoading(false);
-
-      console.log("Used all API credits");
-    }
+    axios
+      .get(
+        `https://api.bigdatacloud.net/data/reverse-geocode?latitude=${supplierLat}&longitude=${supplierLong}&localityLanguage=en&key=bdc_e206f75416ee4fbbae4027b1b2c05421`
+      )
+      .then((res) => {
+        console.log(res.data.city);
+      })
+      .catch((err) => {
+        console.log("not working");
+      });
   };
 
   // const getLocation = () => {
@@ -162,13 +153,6 @@ const SellFood = () => {
     if (!user) return navigate("/");
 
     fetchUserName2();
-
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-      // setSupplierLat(position.coords.latitude);
-      // setSupplierLong(position.coords.longitude);
-    });
 
     const q = query(
       collection(db, "posts"),
