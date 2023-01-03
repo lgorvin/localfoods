@@ -170,9 +170,6 @@ const NavBar = () => {
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
                     <NavLink to="/">Home</NavLink>
                   </li>
-                  <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
-                    <NavLink to="/test">test</NavLink>
-                  </li>
 
                   <li className="mx-6 font-semibold text-xl text-black hover:scale-110 duration-300 cursor-pointer">
                     <NavLink to="/findfood">Food Hub</NavLink>
