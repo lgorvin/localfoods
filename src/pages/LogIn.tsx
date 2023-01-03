@@ -16,36 +16,44 @@ function LogIn() {
     if (user) navigate("/dashboard");
   }, [user, loading]);
   return (
-    <div className="h-screen w-screen grid items-center justify-center mt-[-50px] scale-110">
-      <div className="login__container">
+    <div className="h-screen w-screen flex items-center justify-center">
+      <div className="flex flex-col text-center bg-slate-200 p-[30px]">
         <input
           type="text"
-          className="login__textBox"
+          className="p-[10px] mb-[10px] text-xl"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="login__textBox"
+          className="p-[10px] mb-[10px] text-xl"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         <button
-          className="login__btn"
+          className="p-[10px] mb-[10px] text-xl bg-black text-white"
           onClick={() => logInWithEmailAndPassword(email, password)}
         >
           Login
         </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
+        <button
+          className="p-[10px] mb-[10px] text-xl text-white bg-blue-600"
+          onClick={signInWithGoogle}
+        >
           Login with Google
         </button>
-        <div>
-          <Link to="/reset">Forgot Password</Link>
+        <div className="mt-4">
+          <p className="hover:text-blue-800 duration-300">
+            <Link to="/reset">Forgot Password</Link>
+          </p>
         </div>
         <div>
-          Don't have an account? <Link to="/signup">Register</Link> now.
+          Don't have an account?{" "}
+          <span className="text-blue-600 hover:text-blue-800 duration-300">
+            <Link to="/signup">Register now.</Link>
+          </span>
         </div>
       </div>
     </div>

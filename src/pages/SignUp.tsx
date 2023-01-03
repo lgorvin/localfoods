@@ -48,14 +48,14 @@ function SignUp() {
     });
   }, [user, loading]);
   return (
-    <div className="h-screen w-screen grid items-center justify-center mt-[-50px] scale-110">
-      <div className="register__container">
+    <div className="h-screen w-screen flex items-center justify-center">
+      <div className="flex flex-col text-center bg-slate-200 p-[30px]">
         <div className="">
           <h1 className="mb-[-10px] font-bold">Consumer or Supplier?</h1> <br />
           <h1 className="text-center inline">Supplier</h1>
           <input
             type="checkbox"
-            className="register__textBox inline ml-5 scale-125"
+            className=" inline ml-5 scale-125"
             // value={supplier}
             checked={supplier}
             onClick={handleSClick}
@@ -75,7 +75,7 @@ function SignUp() {
           <h1 className="text-center inline">Consumer</h1>
           <input
             type="checkbox"
-            className="register__textBox inline ml-5 scale-125"
+            className=" inline ml-5 scale-125"
             // value={supplier}
             checked={consumer}
             onClick={handleCClick}
@@ -89,7 +89,7 @@ function SignUp() {
         </div>
         <input
           type="text"
-          className="register__textBox"
+          className="p-[10px] mb-[10px] text-xl"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
@@ -97,29 +97,35 @@ function SignUp() {
 
         <input
           type="text"
-          className="register__textBox"
+          className="p-[10px] mb-[10px] text-xl"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="register__textBox"
+          className="p-[10px] mb-[10px] text-xl"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
+        <button
+          className="p-[10px] mb-[10px] text-xl text-white bg-black"
+          onClick={register}
+        >
           Register
         </button>
         <button
-          className="register__btn register__google"
+          className="p-[10px] mb-[10px] text-xl text-white bg-blue-600"
           onClick={signInWithGoogle}
         >
           Register with Google
         </button>
-        <div>
-          Already have an account? <Link to="/login">Login</Link> now.
+        <div className="mt-4">
+          Already have an account?{" "}
+          <span className="text-blue-600 hover:text-blue-800 duration-300">
+            <Link to="/login">Login now.</Link>
+          </span>
         </div>
       </div>
     </div>
